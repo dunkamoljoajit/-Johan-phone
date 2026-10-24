@@ -1,3 +1,8 @@
+:root {
+    /* ใส่ URL รูปภาพพื้นหลังที่ต้องการตรงนี้ */
+    --wallpaper-url: url('https://i.pinimg.com/1200x/8d/bb/b8/8dbbb882929048c327e853120a4b5487.jpg');
+}
+
 body {
     font-family: 'Prompt', sans-serif;
     background-color: #0f0f11;
@@ -26,7 +31,11 @@ body {
     width: 100%;
     height: 100%;
     border-radius: 2px;
-    background: radial-gradient(circle at 50% 38%, #19181f 0%, #19181f 28%, #3c3042 60%, #18151f 100%);
+    /* ดึงตัวแปรรูปพื้นหลังมาใช้งาน */
+    background-image: var(--wallpaper-url);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     position: relative;
     overflow: hidden;
     display: flex;
@@ -114,29 +123,36 @@ body {
 
 /* =========================================
    ส่วนตั้งค่า Responsive สำหรับหน้าจอมือถือ
+   (ย่อขนาดเครื่อง S25 Ultra ให้พอดีจอ iPhone โดยคงทรงกรอบและรูกล้องเดิม)
 ========================================= */
 @media (max-width: 480px) {
     body {
-        background-color: #fff; /* เปลี่ยนพื้นหลังให้กลืนกับแอป */
-        display: block; /* ยกเลิกการจัดกลาง */
+        background-color: #0f0f11;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100dvh;
+        margin: 0;
+        overflow: hidden;
     }
 
     .phone-frame {
-        width: 100vw;
-        height: 100dvh; /* ใช้ 100dvh เพื่อให้พอดีกับจอมือถือจริงๆ */
-        border-radius: 0;
-        padding: 0;
-        box-shadow: none;
-        background: none; /* เอาพื้นหลังกรอบเครื่องออก */
+        width: 375px;
+        height: 812px;
+        border-radius: 6px;
+        padding: 4px;
+        background: linear-gradient(135deg, #3a3b3e, #1a1b1e, #0d0e10);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+        transform: scale(min(calc((100vw - 24px) / 375), calc((100dvh - 24px) / 812)));
+        transform-origin: center center;
     }
 
     .screen {
-        border-radius: 0;
-        height: 100dvh;
+        border-radius: 2px;
+        height: 100%;
     }
 
-    /* ซ่อนรูกล้อง (Punch hole) เมื่อเปิดบนมือถือจริง */
     .punch-hole {
-        display: none;
+        display: block;
     }
 }
