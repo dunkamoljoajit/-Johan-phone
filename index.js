@@ -65,6 +65,7 @@ const albumData = {
         photos: [
             { url: 'https://i.pinimg.com/1200x/0f/d7/19/0fd719f4793afdbe0fdb8f345d7de779.jpg', date: 'วันนี้, 14:20 น.' },
             { url: 'https://i.pinimg.com/736x/a0/79/78/a07978b4f404bae022234ac944cce65c.jpg', date: 'วันนี้, 12:15 น.' },
+            { url: 'https://i.pinimg.com/736x/1d/c1/4a/1dc14aaadd062d1257dede7c5e28cfad.jpg', date: 'วันนี้, 12:15 น.' },
             { url: 'https://i.pinimg.com/1200x/5a/e1/82/5ae182ee6c6416625cbf3ac60dea52bd.jpg', date: '20 ต.ค., 09:40 น.' },
             { url: 'https://i.pinimg.com/736x/61/75/7b/61757b699f3cd0a712e3181358c116b9.jpg', date: '23 ต.ค., 09:41 น.' },
             { url: 'https://i.pinimg.com/1200x/b9/c3/00/b9c300108fd5832282ef08fb33cd64ad.jpg', date: '18 ต.ค., 14:30 น.' },
@@ -90,6 +91,7 @@ const albumData = {
             { url: 'https://i.pinimg.com/736x/12/ef/b1/12efb1be0bc5cff919d50c5b7e7345ec.jpg', date: '18 ต.ค., 14:35 น.' },
             { url: 'https://i.pinimg.com/736x/16/2f/eb/162feb0fe79d080634d9095bac942dd8.jpg', date: '23 ต.ค., 18:30 น.' },
             { url: 'https://i.pinimg.com/736x/3c/2c/71/3c2c716364aef868ca0264fb94f4ef33.jpg', date: '21 ต.ค., 14:35 น.' },
+            { url: 'https://i.pinimg.com/1200x/4a/36/27/4a3627206f9b377879df61d1c91d3835.jpg', date: '23 ต.ค., 14:35 น.' },
             { url: 'https://i.pinimg.com/736x/ad/e9/9e/ade99e2f8dd0326fa6e5292a70d245cf.jpg', date: '20 ต.ค., 14:35 น.' }
         ]
     }
