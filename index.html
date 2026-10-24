@@ -174,7 +174,7 @@
                 </div>
             </div>
 
-            <!-- SINGLE ALBUM DETAIL VIEW -->
+            <<!-- SINGLE ALBUM DETAIL VIEW -->
             <div id="gallery-album-detail-view" class="hidden absolute inset-0 bg-white z-30 pt-9 flex flex-col">
                 <div class="px-4 py-2 flex items-center justify-between border-b border-gray-100 sticky top-0 bg-white z-10">
                     <div class="flex items-center gap-3">
@@ -186,26 +186,18 @@
                     </div>
                     <div class="flex gap-4 text-gray-700 text-base">
                         <i class="fas fa-search cursor-pointer" onclick="showToast('Search')"></i>
-                        <i class="fas fa-ellipsis-v cursor-pointer" onclick="showToast('More')"></i>
-                    </div>
-                </div>
+                        <i class="fas fa-ellipsis-v cursor-pointer
             
-                <!-- ปรับเพิ่ม pb-32 ตรงนี้เพื่อไม่ให้รูปแถวสุดท้ายโดนบัง -->
-                <div id="album-detail-grid" class="flex-1 overflow-y-auto no-scrollbar p-3 grid grid-cols-3 gap-1.5 content-start pb-32">
-                    <!-- Album Specific Photos injected here -->
-                </div>
-            </div>
-
-        </div>
-
-        <!-- FULL-SCREEN PHOTO VIEWER MODAL -->
-        <div id="photo-viewer" class="hidden absolute inset-0 bg-black z-50 flex flex-col justify-between">
-            <!-- Top Bar -->
-            <div class="p-4 flex items-center justify-between text-white bg-gradient-to-b from-black/70 to-transparent z-10 pt-9">
-                <i class="fas fa-chevron-left text-lg cursor-pointer p-2" onclick="closePhotoViewer()"></i>
-                <div id="viewer-date" class="text-xs font-medium opacity-90">วันนี้, 14:20 น.</div>
-                <i class="fas fa-info-circle text-lg cursor-pointer p-2" onclick="showToast('Samsung S25 Ultra 200MP')"></i>
-            </div>
+                    </div>
+            
+                    <!-- FULL-SCREEN PHOTO VIEWER MODAL -->
+                    <div id="photo-viewer" class="hidden absolute inset-0 bg-black z-50 flex flex-col justify-between">
+                        <!-- Top Bar -->
+                        <div class="p-4 flex items-center justify-between text-white bg-gradient-to-b from-black/70 to-transparent z-10 pt-9">
+                            <i class="fas fa-chevron-left text-lg cursor-pointer p-2" onclick="closePhotoViewer()"></i>
+                            <div id="viewer-date" class="text-xs font-medium opacity-90">วันนี้, 14:20 น.</div>
+                            <i class="fas fa-info-circle text-lg cursor-pointer p-2" onclick="showToast('Samsung S25 Ultra 200MP')"></i>
+                        </div>
 
             <!-- Image Container -->
             <div class="flex-1 flex items-center justify-center relative px-2 overflow-hidden">
