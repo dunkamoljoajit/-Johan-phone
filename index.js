@@ -355,6 +355,11 @@ function renderAlbumsGrid() {
 }
 
 function openAlbumDetail(albumKey) {
+    // อัปเดตอัลบั้มรายการโปรดให้เป็นข้อมูลล่าสุดก่อนเรนเดอร์เสมอ
+    if (albumKey === 'favorites') {
+        updateFavoritesAlbum();
+    }
+
     const data = albumData[albumKey];
     if (!data) return;
 
@@ -371,7 +376,8 @@ function openAlbumDetail(albumKey) {
 
     validPhotos.forEach((item, index) => {
         const card = document.createElement('div');
-        card.className = "aspect-square bg-gray-100 rounded-xl overflow-hidden shadow-sm active:scale-95 transition-transform cursor-pointer";
+        // ใส่ w-full กำกับคู่กับ aspect-square เพื่อป้องกันปัญหาแถวบีบซ้อนทับกัน
+        card.className = "w-full aspect-square bg-gray-100 rounded-xl overflow-hidden shadow-sm active:scale-95 transition-transform cursor-pointer";
         card.onclick = () => openPhotoViewer(validPhotos, index);
         card.innerHTML = `<img src="${item.url}" class="w-full h-full object-cover">`;
         grid.appendChild(card);
