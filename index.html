@@ -174,6 +174,446 @@
                 </div>
             </div>
 
+            <!-- SINGLE ALBUM DETAIL VIEW -->
+            <div id="gallery-album-detail-view" class="hidden absolute inset-0 bg-white z-30 pt-9 flex flex-col">
+                <div class="px-4 py-2 flex items-center justify-between border-b border-gray-100 sticky top-0 bg-white z-10">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-chevron-left text-gray-800 text-lg cursor-pointer" onclick="closeAlbumDetail()"></i>
+                        <div>
+                            <h2 id="album-detail-title" class="font-bold text-base text-gray-900">ชื่ออัลบั้ม</h2>
+                            <p id="album-detail-count" class="text-[11px] text-gray-400">0 รายการ</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 text-gray-700 text-base">
+                        <i class="fas fa-search cursor-pointer" onclick="showToast('Search')"></i>
+                        <i class="fas fa-ellipsis-v cursor-pointer" onclick="showToast('More')"></i>
+                    </div>
+                </div>
+
+                <div id="album-detail-grid" class="flex-1 overflow-y-auto no-scrollbar p-3 grid grid-cols-3 gap-1.5 content-start pb-20">
+                    <!-- Album Specific Photos injected here -->
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FULL-SCREEN PHOTO VIEWER MODAL -->
+        <div id="photo-viewer" class="hidden absolute inset-0 bg-black z-50 flex flex-col justify-between">
+            <!-- Top Bar -->
+            <div class="p-4 flex items-center justify-between text-white bg-gradient-to-b from-black/70 to-transparent z-10 pt-9">
+                <i class="fas fa-chevron-left text-lg cursor-pointer p-2" onclick="closePhotoViewer()"></i>
+                <div id="viewer-date" class="text-xs font-medium opacity-90">วันนี้, 14:20 น.</div>
+                <i class="fas fa-info-circle text-lg cursor-pointer p-2" onclick="showToast('Samsung S25 Ultra 200MP')"></i>
+            </div>
+
+            <!-- Image Container -->
+            <div class="flex-1 flex items-center justify-center relative px-2 overflow-hidden">
+                <img id="viewer-img" src="" class="max-w-full max-h-full object-contain transition-transform duration-300">
+            </div>
+
+            <!-- Bottom Action Bar -->
+            <div class="p-4 pb-8 flex justify-around items-center text-white bg-gradient-to-t from-black/80 to-transparent z-10">
+                <button type="button" aria-label="Favorite photo" onclick="toggleViewerFavorite()" class="flex flex-col items-center gap-1 hover:text-rose-400 transition-colors">
+                    <i id="viewer-fav-icon" class="far fa-heart text-xl"></i>
+                    <span id="viewer-lbl-fav" class="text-[10px]">โปรด</span>
+                </button>
+                <button type="button" aria-label="Edit photo" onclick="showToast('AI Photo Editor')" class="flex flex-col items-center gap-1 hover:text-blue-400 transition-colors">
+                    <i class="fas fa-pen text-lg"></i>
+                    <span id="viewer-lbl-edit" class="text-[10px]">แก้ไข</span>
+                </button>
+                <button type="button" aria-label="Share photo" onclick="showToast('Quick Share')" class="flex flex-col items-center gap-1 hover:text-green-400 transition-colors">
+                    <i class="fas fa-share-alt text-lg"></i>
+                    <span id="viewer-lbl-share" class="text-[10px]">แชร์</span>
+                </button>
+                <button type="button" aria-label="Delete photo" onclick="showToast('Deleted')" class="flex flex-col items-center gap-1 hover:text-red-500 transition-colors">
+                    <i class="far fa-trash-alt text-lg"></i>
+                    <span id="viewer-lbl-delete" class="text-[10px]">ลบ</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= APP 2: MESSAGES ================= -->
+        <div id="app-messages" class="app-view hidden bg-gray-50 pt-9 flex flex-col h-full">
+            
+            <!-- 1. แถบด้านบน (Header) -->
+            <div class="px-4 py-3 bg-white flex items-center justify-between shadow-sm z-10 shrink-0">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-chevron-left text-blue-500 text-lg cursor-pointer p-1" onclick="closeApp()"></i>
+                    <div>
+                        <div id="msg-contact-name" class="font-semibold text-sm text-gray-900">North</div>
+                        <div id="msg-contact-status" class="text-[10px] text-gray-500">ใช้งานเมื่อครู่นี้</div>
+                    </div>
+                </div>
+                <div class="flex gap-4 pr-1">
+                    <i class="fas fa-video text-blue-500 text-base cursor-pointer"></i>
+                    <i class="fas fa-phone-alt text-blue-500 text-base cursor-pointer"></i>
+                </div>
+            </div>
+
+            <!-- 2. พื้นที่แชท (Chat History) - ใส่ข้อความจำลองให้เต็มหน้า -->
+            <div class="flex-1 p-4 flex flex-col gap-3 overflow-y-auto no-scrollbar pb-4">
+                
+                <!-- แชทเก่าวันที่ 1 -->
+                <div id="msg-date-1" class="text-center text-[10px] text-gray-400 mt-1">เมื่อวาน 08:30 น.</div>
+                <div id="msg-old-1" class="self-end bg-blue-500 text-white rounded-2xl rounded-tr-sm px-4 py-2 text-[13px] max-w-[80%] shadow-sm">มอนิ่งครับ วันนี้มีเรียนเช้าไหม?</div>
+                <div id="msg-old-2" class="self-start bg-white border border-gray-200 text-gray-800 rounded-2xl rounded-tl-sm px-4 py-2 text-[13px] max-w-[80%] shadow-sm">มีครับ 10 โมง</div>
+                <div id="msg-old-3" class="self-end bg-blue-500 text-white rounded-2xl rounded-tr-sm px-4 py-2 text-[13px] max-w-[80%] shadow-sm">ตั้งใจเรียนนะ เลิกแล้วทักมา</div>
+                <div id="msg-old-4" class="self-start bg-white border border-gray-200 text-gray-800 rounded-2xl rounded-tl-sm px-4 py-2 text-[13px] max-w-[80%] shadow-sm">ค้าบบบ พี่ก็สู้ๆ นะ ✌️</div>
+                
+                <!-- แชทเก่าวันที่ 2 -->
+                <div id="msg-date-2" class="text-center text-[10px] text-gray-400 mt-2">วันนี้ 12:15 น.</div>
+                <div id="msg-old-5" class="self-end bg-blue-500 text-white rounded-2xl rounded-tr-sm px-4 py-2 text-[13px] max-w-[80%] shadow-sm">พักเที่ยงแล้ว กินอะไรหรือยัง?</div>
+                <div id="msg-old-6" class="self-start bg-white border border-gray-200 text-gray-800 rounded-2xl rounded-tl-sm px-4 py-2 text-[13px] max-w-[80%] shadow-sm">กินก๋วยเตี๋ยวหน้ามอครับ อร่อยมากก 🍜</div>
+
+                <!-- ข้อความล่าสุด -->
+                <div id="msg-date-header" class="text-center text-[10px] text-gray-400 mt-2">วันนี้ 16:30 น.</div>
+                <div id="msg-outgoing" class="self-end bg-blue-500 text-white rounded-2xl rounded-tr-sm px-4 py-2 text-[13px] max-w-[80%] shadow-sm">เลิกเรียนเดี๋ยวพี่ไปรับน่ะ</div>
+                <div id="msg-incoming" class="self-start bg-white border border-gray-200 text-gray-800 rounded-2xl rounded-tl-sm px-4 py-2 text-[13px] max-w-[80%] shadow-sm">ครับ รับทราบ</div>
+            </div>
+
+            <!-- 3. แถบพิมพ์ข้อความด้านล่าง (Chat Input Bar) -->
+            <div class="bg-gray-50 border-t border-gray-200 px-3 py-2.5 flex items-center gap-3 shrink-0 pb-12 z-10">
+                <i class="fas fa-plus-circle text-gray-400 text-xl cursor-pointer hover:text-blue-500 transition-colors"></i>
+                <i class="far fa-image text-gray-400 text-xl cursor-pointer hover:text-blue-500 transition-colors"></i>
+                <div class="flex-1 bg-white border border-gray-200 rounded-full h-9 flex items-center px-4 shadow-sm">
+                    <span class="text-[11px] text-gray-400">พิมพ์ข้อความ...</span>
+                </div>
+                <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center shadow-sm cursor-pointer hover:bg-blue-600 transition-colors">
+                    <i class="fas fa-paper-plane text-white text-xs -ml-0.5"></i>
+                </div>
+            </div>
+            
+        </div>
+        <!-- ================= APP 3: INSTAGRAM ================= -->
+        <div id="app-ig" class="app-view hidden bg-white pt-9 flex flex-col h-full">
+            
+            <!-- IG Header -->
+            <div class="flex justify-between items-center px-4 py-2 border-b border-gray-100 shrink-0 z-10 bg-white">
+                <div class="font-bold text-xl font-serif text-gray-900">Instagram</div>
+                <div class="flex gap-4 text-black text-xl">
+                    <i class="far fa-heart cursor-pointer"></i>
+                    <i class="fab fa-facebook-messenger cursor-pointer"></i>
+                </div>
+            </div>
+            
+            <!-- IG Feed -->
+            <div class="flex-1 overflow-y-auto no-scrollbar pb-4 bg-white">
+                <!-- Post 1 -->
+                <div class="mb-4">
+                    <!-- Post Header -->
+                    <div class="flex items-center justify-between px-3 py-2">
+                        <div class="flex items-center gap-2">
+                            <!-- กรอบสีรุ้งรอบรูปโปรไฟล์ (Story) -->
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 p-[2px]">
+                                <div class="w-full h-full bg-white rounded-full border-2 border-white overflow-hidden">
+                                    <img src="https://i.pinimg.com/736x/27/35/ba/2735ba49684f45d2b9feda306b3f9f7e.jpg" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            <!-- ชื่อ User (ดึงจาก JS ที่ตั้งไว้) -->
+                            <span id="x-user-name" class="font-bold text-[13px] text-gray-900">North</span>
+                        </div>
+                        <i class="fas fa-ellipsis-h text-gray-500"></i>
+                    </div>
+                    
+                    <!-- Post Image (เลื่อนได้ 4 รูป) -->
+                    <div class="relative w-full h-[350px] bg-gray-100 flex overflow-x-auto snap-x snap-mandatory no-scrollbar">
+                        <!-- รูปที่ 1 -->
+                        <div class="min-w-full h-full snap-center flex-shrink-0">
+                            <img src="https://i.pinimg.com/1200x/8d/bb/b8/8dbbb882929048c327e853120a4b5487.jpg" class="w-full h-full object-cover">
+                        </div>
+                        
+                        <!-- รูปที่ 2 -->
+                        <div class="min-w-full h-full snap-center flex-shrink-0">
+                            <img src="https://i.pinimg.com/1200x/1c/33/5f/1c335fcda9853822514cefbae30c64d4.jpg" class="w-full h-full object-cover">
+                        </div>
+                        
+                        <!-- รูปที่ 3 -->
+                        <div class="min-w-full h-full snap-center flex-shrink-0">
+                            <img src="https://i.pinimg.com/736x/84/e1/21/84e1216d715e637d31dfbffb56332801.jpg" class="w-full h-full object-cover">
+                        </div>
+                        
+                        <!-- รูปที่ 4 -->
+                        <div class="min-w-full h-full snap-center flex-shrink-0">
+                            <img src="https://i.pinimg.com/1200x/c2/07/d3/c207d32f187b792701c1584170ca2627.jpg" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    
+                    <!-- Post Actions -->
+                    <div class="flex items-center justify-between px-3 py-3">
+                        <div class="flex gap-4 text-2xl text-black">
+                            <i class="far fa-heart cursor-pointer hover:text-red-500 transition-colors"></i>
+                            <i class="far fa-comment cursor-pointer"></i>
+                            <i class="far fa-paper-plane cursor-pointer"></i>
+                        </div>
+                        <i class="far fa-bookmark text-2xl text-black cursor-pointer"></i>
+                    </div>
+                    
+                    <!-- Post Caption -->
+                    <div class="px-3 pb-2 text-sm text-gray-900 leading-relaxed">
+                        <span class="font-bold mr-1">North</span>
+                        <!-- ข้อความ (ดึงจาก JS ที่ตั้งไว้) -->
+                        <span id="x-post-content">แกกกก วันนี้เห็นคุณปัณณวิชญ์มารอรับน้องมัทธนาที่หน้าตึกอีกแล้วว สายตาที่มองคือหวานเจี๊ยบ! 💖</span>
+                    </div>
+                    <div class="px-3 text-[11px] text-gray-400">ดูคำแปล</div>
+                </div>
+            </div>
+            
+            <!-- IG Bottom Navigation -->
+            <div class="flex justify-around items-center px-4 pt-3 border-t border-gray-100 bg-white shrink-0 pb-12 z-10">
+                <i class="fas fa-home text-2xl text-black"></i>
+                <i class="fas fa-search text-2xl text-gray-400 hover:text-black"></i>
+                <i class="far fa-plus-square text-2xl text-gray-400 hover:text-black"></i>
+                <i class="fas fa-video text-2xl text-gray-400 hover:text-black"></i>
+                <div class="w-6 h-6 rounded-full bg-gray-200 border border-gray-300 overflow-hidden">
+                    <img src="https://i.pinimg.com/1200x/af/97/3d/af973d950208b4c3340959f5ed7650dd.jpg" class="w-full h-full">
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- Recents Apps Overlay -->
+        <div id="recents-overlay" class="hidden absolute inset-0 z-50 bg-black/80 backdrop-blur-xl p-5 flex-col">
+            <div class="flex items-center justify-between text-white mb-6 mt-8">
+                <h2 id="recents-title" class="text-xl font-semibold">แอปล่าสุด</h2>
+                <button id="recents-clear-btn" onclick="clearRecents()" class="text-sm text-gray-300 hover:text-white">ปิดทั้งหมด</button>
+            </div>
+            <div id="recents-list" class="grid grid-cols-2 gap-3 overflow-y-auto no-scrollbar"></div>
+            <button id="recents-home-btn" onclick="hideRecents()" class="mt-auto mx-auto mb-14 px-6 py-2 rounded-full bg-white/20 text-white text-sm">กลับไปหน้าหลัก</button>
+        </div>
+
+        <!-- Toast Popup -->
+        <div id="toast" class="toast-notification">การแจ้งเตือน</div>
+
+        <!-- Universal Bottom Navigation Bar -->
+        <div id="nav-bar" class="absolute bottom-0 left-0 w-full h-11 flex justify-around items-center z-40 text-gray-300 bg-black/20 backdrop-blur-md">
+            <button type="button" aria-label="Recent apps" onclick="showRecents()" class="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                <i class="fas fa-bars text-xs"></i>
+            </button>
+            <button type="button" aria-label="Home" onclick="goHome()" class="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                <div class="w-3.5 h-3.5 border-2 border-current rounded-[3px]"></div>
+            </button>
+            <button type="button" aria-label="Back" onclick="goBack()" class="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                <i class="fas fa-chevron-left text-xs"></i>
+            </button>
+        </div>
+
+        <!-- POPUP SELECT LANGUAGE ON STARTUP / CHANGE -->
+        <div id="lang-select-modal" class="absolute inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-5">
+            <div class="bg-white rounded-[28px] p-5 w-full text-center shadow-2xl border border-gray-100 max-h-[90%] overflow-y-auto no-scrollbar">
+                <div class="w-12 h-12 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-2 text-xl">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h3 class="text-sm font-bold text-gray-900 mb-0.5">เลือกภาษา / Select Language</h3>
+                <p class="text-[11px] text-gray-500 mb-4 leading-relaxed">กรุณาเลือกภาษาที่ต้องการใช้งาน</p>
+                
+                <div class="flex flex-col gap-2">
+                    <button type="button" onclick="chooseInitialLanguage('th')" class="w-full py-2.5 px-4 bg-gray-100 hover:bg-blue-500 hover:text-white rounded-2xl text-xs font-bold text-gray-800 transition-all flex items-center justify-between active:scale-95">
+                        <span>🇹🇭 ภาษาไทย</span>
+                        <i class="fas fa-chevron-right text-[10px] opacity-40"></i>
+                    </button>
+                    <button type="button" onclick="chooseInitialLanguage('en')" class="w-full py-2.5 px-4 bg-gray-100 hover:bg-blue-500 hover:text-white rounded-2xl text-xs font-bold text-gray-800 transition-all flex items-center justify-between active:scale-95">
+                        <span>🇬🇧 English</span>
+                        <i class="fas fa-chevron-right text-[10px] opacity-40"></i>
+                    </button>
+                    <button type="button" onclick="chooseInitialLanguage('ko')" class="w-full py-2.5 px-4 bg-gray-100 hover:bg-blue-500 hover:text-white rounded-2xl text-xs font-bold text-gray-800 transition-all flex items-center justify-between active:scale-95">
+                        <span>🇰🇷 한국어</span>
+                        <i class="fas fa-chevron-right text-[10px] opacity-40"></i>
+                    </button>
+                    <button type="button" onclick="chooseInitialLanguage('ja')" class="w-full py-2.5 px-4 bg-gray-100 hover:bg-blue-500 hover:text-white rounded-2xl text-xs font-bold text-gray-800 transition-all flex items-center justify-between active:scale-95">
+                        <span>🇯🇵 日本語</span>
+                        <i class="fas fa-chevron-right text-[10px] opacity-40"></i>
+                    </button>
+                    <button type="button" onclick="chooseInitialLanguage('zh')" class="w-full py-2.5 px-4 bg-gray-100 hover:bg-blue-500 hover:text-white rounded-2xl text-xs font-bold text-gray-800 transition-all flex items-center justify-between active:scale-95">
+                        <span>🇨🇳 中文</span>
+                        <i class="fas fa-chevron-right text-[10px] opacity-40"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="index.js"></script>
+</body>
+</html>
+=======
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Samsung Galaxy S25 Ultra One UI 7 Simulator</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Prompt & Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<div class="phone-frame">
+    <div class="screen">
+
+        <!-- Punch-hole Camera -->
+        <div class="punch-hole"></div>
+
+        <!-- Status Bar -->
+        <div class="flex justify-between items-center px-4 pt-3 text-white text-xs font-medium z-50 relative pointer-events-none">
+            <div id="status-time">12:42</div>
+            <div class="flex gap-1.5 items-center">
+                <i class="fas fa-wifi text-[10px]"></i>
+                <i class="fas fa-signal text-[10px]"></i>
+                <i class="fas fa-battery-three-quarters text-[12px]"></i>
+            </div>
+        </div>
+
+        <!-- HOME SCREEN -->
+        <div id="home-screen" class="flex-1 px-4 pt-6 pb-20 overflow-y-auto no-scrollbar relative z-10">
+            
+            <!-- One UI Widgets Grid -->
+            <div class="grid grid-cols-2 gap-3 mb-6">
+                <!-- Weather Widget -->
+                <div class="col-span-1 bg-[#3b82f6] rounded-[24px] p-4 text-white flex flex-col justify-between ui-shadow h-36 relative overflow-hidden">
+                    <i class="fas fa-cloud-sun text-2xl text-yellow-300 absolute top-4 right-4"></i>
+                    <div class="mt-auto">
+                        <div class="text-3xl font-semibold mb-1">28°</div>
+                        <div id="widget-city" class="text-[9px] opacity-90 leading-[1.2] mb-1">กรุงเทพมหานคร</div>
+                        <div id="widget-weather-desc" class="text-[9px] opacity-75">แดดจัด · สูงสุด 33°</div>
+                    </div>
+                </div>
+
+                <!-- Right Stack Widgets -->
+                <div class="col-span-1 flex flex-col gap-3">
+                    <div class="bg-white/90 backdrop-blur-md rounded-[24px] p-3 flex flex-col justify-center items-center ui-shadow h-[66px]">
+                        <div class="text-[10px] text-gray-500 font-medium">12:42</div>
+                        <div id="widget-summary" class="font-semibold text-gray-800 text-[11px] mt-0.5">สรุปช่วงกลางวัน</div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-[#06b6d4] to-[#22c55e] rounded-[24px] px-3 py-2 flex items-center justify-between ui-shadow h-[66px] relative overflow-hidden">
+                        <div class="font-semibold text-white text-[11px] z-10 leading-tight">Samsung<br>Health</div>
+                        <svg viewBox="0 0 36 36" class="w-10 h-10 absolute -right-2 top-1/2 transform -translate-y-1/2 opacity-90">
+                            <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="4.5" />
+                            <path d="M18 6.0845 a 11.9155 11.9155 0 0 1 0 23.831 a 11.9155 11.9155 0 0 1 0 -23.831" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="4.5" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Google Search Widget -->
+            <div class="bg-white/80 backdrop-blur-md rounded-full flex items-center px-4 py-2.5 mb-8 ui-shadow">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="w-4 h-4 mr-3">
+                    <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                    <path fill="#4285F4" d="M46.5 24c0-1.65-.15-3.23-.42-4.75H24v9h12.75c-.55 2.95-2.22 5.46-4.73 7.14l7.33 5.68C43.68 37.1 46.5 31.17 46.5 24z"/>
+                    <path fill="#FBBC05" d="M10.54 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.98-6.19z"/>
+                    <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.33-5.68c-2.11 1.42-4.8 2.29-8.56 2.29-6.26 0-11.57-4.22-13.46-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                </svg>
+                <span id="widget-search-placeholder" class="text-xs text-gray-500 flex-1">ค้นหา...</span>
+                <i class="fas fa-microphone text-blue-500 mr-3 text-sm"></i>
+                <i class="fas fa-camera text-blue-500 text-sm"></i>
+            </div>
+
+            <!-- Home Screen App Icons -->
+            <div class="grid grid-cols-4 gap-y-6 gap-x-2 px-1">
+                <!-- Gallery App -->
+                <div class="flex flex-col items-center gap-1 cursor-pointer group" onclick="openApp('app-gallery', 'light')">
+                    <div class="w-[52px] h-[52px] bg-[#ffffff] squircle flex items-center justify-center ui-shadow relative overflow-hidden group-active:scale-90 transition-transform">
+                        <div class="absolute w-4 h-4 bg-rose-500 rounded-full top-2 left-2 opacity-90 mix-blend-multiply"></div>
+                        <div class="absolute w-4 h-4 bg-rose-500 rounded-full top-2 right-2 opacity-90 mix-blend-multiply"></div>
+                        <div class="absolute w-4 h-4 bg-rose-500 rounded-full bottom-2 left-2 opacity-90 mix-blend-multiply"></div>
+                        <div class="absolute w-4 h-4 bg-rose-500 rounded-full bottom-2 right-2 opacity-90 mix-blend-multiply"></div>
+                        <div class="absolute w-3.5 h-3.5 bg-rose-400 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"></div>
+                    </div>
+                    <span id="app-label-gallery" class="text-white text-[10px] font-medium shadow-black">แกลเลอรี</span>
+                </div>
+
+                <!-- Messages -->
+                <div class="flex flex-col items-center gap-1 cursor-pointer group" onclick="openApp('app-messages', 'light')">
+                    <div class="w-[52px] h-[52px] bg-[#3b82f6] squircle flex items-center justify-center ui-shadow group-active:scale-90 transition-transform">
+                        <i class="fas fa-comment-alt text-white text-xl"></i>
+                    </div>
+                    <span id="app-label-messages" class="text-white text-[10px] font-medium">ข้อความ</span>
+                </div>
+
+                <!-- Instagram -->
+                <div class="flex flex-col items-center gap-1 cursor-pointer group" onclick="openApp('app-ig', 'light')">
+                    <div class="w-[52px] h-[52px] bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 squircle flex items-center justify-center ui-shadow group-active:scale-90 transition-transform">
+                        <i class="fab fa-instagram text-white text-3xl"></i>
+                    </div>
+                    <span class="text-white text-[10px] font-medium">Instagram</span>
+                </div>
+
+                <!-- Galaxy Store -->
+                <div class="flex flex-col items-center gap-1 cursor-pointer group" onclick="showToast('Store')">
+                    <div class="w-[52px] h-[52px] bg-pink-500 squircle flex items-center justify-center ui-shadow group-active:scale-90 transition-transform">
+                        <i class="fas fa-shopping-bag text-white text-xl"></i>
+                    </div>
+                    <span class="text-white text-[10px] font-medium">Store</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom App Dock -->
+        <div class="absolute bottom-12 left-4 right-4 flex justify-between px-3 py-2 z-20">
+            <div class="w-[50px] h-[50px] bg-[#22c55e] squircle flex items-center justify-center shadow-lg cursor-pointer active:scale-90 transition-transform" onclick="showToast('Phone')">
+                <i class="fas fa-phone-alt text-white text-xl"></i>
+            </div>
+            <div class="w-[50px] h-[50px] bg-[#3b82f6] squircle flex items-center justify-center shadow-lg cursor-pointer active:scale-90 transition-transform" onclick="openApp('app-messages', 'light')">
+                <i class="fas fa-comment-alt text-white text-xl"></i>
+            </div>
+            <div class="w-[50px] h-[50px] bg-[#6366f1] squircle flex items-center justify-center shadow-lg cursor-pointer active:scale-90 transition-transform" onclick="showToast('Internet')">
+                <i class="fas fa-globe text-white text-2xl"></i>
+            </div>
+            <div class="w-[50px] h-[50px] bg-gray-100 squircle flex items-center justify-center shadow-lg cursor-pointer active:scale-90 transition-transform" onclick="showToast('Camera')">
+                <div class="w-6 h-6 rounded-full bg-gray-800 border-2 border-gray-300 relative flex items-center justify-center">
+                    <div class="w-1.5 h-1.5 rounded-full bg-gray-400 absolute top-1 right-1"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= APP 1: GALLERY ================= -->
+        <div id="app-gallery" class="app-view bg-white pt-9">
+            
+            <!-- Gallery Header -->
+            <div class="px-4 py-2 flex justify-between items-center bg-white z-10 sticky top-0 border-b border-gray-100">
+                <h1 id="ui-gallery-title" class="font-bold text-xl text-gray-900">แกลเลอรี</h1>
+                <div class="flex gap-3 items-center text-gray-700 text-base">
+                    <!-- Language Selector Button -->
+                    <button type="button" onclick="openLanguageModal()" class="text-xs font-bold bg-gray-100 hover:bg-gray-200 text-gray-800 px-2.5 py-1 rounded-full transition-colors border border-gray-200 flex items-center gap-1">
+                        <i class="fas fa-globe text-[11px] text-blue-500"></i>
+                        <span id="lang-btn-text">TH</span>
+                    </button>
+                    <i class="fas fa-plus cursor-pointer" onclick="showToast('New Album')"></i>
+                    <i class="fas fa-search cursor-pointer" onclick="showToast('Search')"></i>
+                    <i class="fas fa-ellipsis-v cursor-pointer" onclick="showToast('More')"></i>
+                </div>
+            </div>
+
+            <!-- Tab Switching Header -->
+            <div class="flex px-4 pt-2 border-b border-gray-100 text-sm font-semibold bg-white sticky top-11 z-10">
+                <button id="tab-btn-pictures" class="flex-1 py-2 text-center text-black border-b-2 border-black transition-colors" onclick="switchGalleryTab('pictures')">
+                    รูปภาพ
+                </button>
+                <button id="tab-btn-albums" class="flex-1 py-2 text-center text-gray-400 border-b-2 border-transparent transition-colors" onclick="switchGalleryTab('albums')">
+                    อัลบั้ม
+                </button>
+            </div>
+
+            <!-- TAB 1: PICTURES VIEW -->
+            <div id="gallery-pictures-view" class="flex-1 overflow-y-auto no-scrollbar pb-20 px-3 pt-2">
+                <!-- JS Inject -->
+            </div>
+
+            <!-- TAB 2: ALBUMS VIEW -->
+            <div id="gallery-albums-view" class="hidden flex-1 overflow-y-auto no-scrollbar pb-20 px-4 pt-3">
+                <div class="grid grid-cols-2 gap-x-4 gap-y-5 content-start">
+                    <!-- JS Inject -->
+                </div>
+            </div>
+
             <<!-- SINGLE ALBUM DETAIL VIEW -->
             <div id="gallery-album-detail-view" class="hidden absolute inset-0 bg-white z-30 pt-9 flex flex-col">
                 <div class="px-4 py-2 flex items-center justify-between border-b border-gray-100 sticky top-0 bg-white z-10">
@@ -430,3 +870,4 @@
 <script src="index.js"></script>
 </body>
 </html>
+
