@@ -91,7 +91,6 @@ const albumData = {
             { url: 'https://i.pinimg.com/736x/12/ef/b1/12efb1be0bc5cff919d50c5b7e7345ec.jpg', date: '18 ต.ค., 14:35 น.' },
             { url: 'https://i.pinimg.com/736x/16/2f/eb/162feb0fe79d080634d9095bac942dd8.jpg', date: '23 ต.ค., 18:30 น.' },
             { url: 'https://i.pinimg.com/736x/3c/2c/71/3c2c716364aef868ca0264fb94f4ef33.jpg', date: '21 ต.ค., 14:35 น.' },
-            { url: 'https://i.pinimg.com/1200x/4a/36/27/4a3627206f9b377879df61d1c91d3835.jpg', date: '23 ต.ค., 14:35 น.' },
             { url: 'https://i.pinimg.com/736x/ad/e9/9e/ade99e2f8dd0326fa6e5292a70d245cf.jpg', date: '20 ต.ค., 14:35 น.' }
         ]
     }
