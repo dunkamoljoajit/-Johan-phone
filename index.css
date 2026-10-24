@@ -1,141 +1,38 @@
-body {
-    font-family: 'Prompt', sans-serif;
-    background-color: #0f0f11;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    user-select: none;
-    overflow: hidden;
-}
-
-/* เครื่อง S25 Ultra: ทรงเหลี่ยม Titanium Frame */
-.phone-frame {
-    width: 375px;
-    height: 812px;
-    border-radius: 6px;
-    background: linear-gradient(135deg, #3a3b3e, #1a1b1e, #0d0e10);
-    padding: 4px;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.8), inset 0 0 2px rgba(255,255,255,0.6);
-    position: relative;
-}
-
-/* Screen Surface */
-.screen {
-    width: 100%;
-    height: 100%;
-    border-radius: 2px;
-    background: radial-gradient(circle at 50% 38%, #19181f 0%, #19181f 28%, #3c3042 60%, #18151f 100%);
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Camera Punch-hole */
-.punch-hole {
-    width: 11px;
-    height: 11px;
-    background: #000;
-    border-radius: 50%;
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 60;
-    box-shadow: inset 0 0 2px rgba(255,255,255,0.2);
-}
-
-/* Base App View Screen Structure */
-.app-view {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    z-index: 30;
-    opacity: 0;
-    pointer-events: none;
-    transform: scale(0.94);
-    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-    display: flex;
-    flex-direction: column;
-}
-
-.app-view.active {
-    opacity: 1;
-    pointer-events: auto;
-    transform: scale(1);
-}
-
-/* Custom Scrollbar Removal */
-.no-scrollbar::-webkit-scrollbar {
-    display: none;
-}
-.no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-/* One UI Widgets & Icons Style */
-.ui-shadow {
-    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
-}
-.squircle {
-    border-radius: 18px;
-}
-
-/* Toast Popup Notification */
-.toast-notification {
-    position: absolute;
-    bottom: 70px;
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background: rgba(30, 30, 32, 0.9);
-    color: #fff;
-    padding: 8px 18px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 500;
-    backdrop-filter: blur(8px);
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s ease;
-    z-index: 100;
-    white-space: nowrap;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-.toast-notification.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-}
-
 /* =========================================
    ส่วนตั้งค่า Responsive สำหรับหน้าจอมือถือ
+   (ย่อขนาดเครื่อง S25 Ultra ให้พอดีจอ iPhone โดยคงทรงกรอบและรูกล้องเดิม)
 ========================================= */
 @media (max-width: 480px) {
     body {
-        background-color: #fff;
-        display: block;
+        background-color: #0f0f11; /* พื้นหลังสีเข้มเพื่อเน้นตัวเครื่อง */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100dvh;
+        margin: 0;
+        overflow: hidden;
     }
 
     .phone-frame {
-        width: 100vw;
-        height: 100dvh;
-        border-radius: 0;
-        padding: 0;
-        box-shadow: none;
-        background: none;
+        width: 375px;
+        height: 812px;
+        border-radius: 6px; /* ขอบทรงเหลี่ยม S25 Ultra */
+        padding: 4px;
+        background: linear-gradient(135deg, #3a3b3e, #1a1b1e, #0d0e10);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+        
+        /* คำนวณย่อขนาดเครื่องอัตโนมัติให้พอดีกับความกว้างและความสูงจอ iPhone */
+        transform: scale(min(calc((100vw - 24px) / 375), calc((100dvh - 24px) / 812)));
+        transform-origin: center center;
     }
 
     .screen {
-        border-radius: 0;
-        height: 100dvh;
+        border-radius: 2px;
+        height: 100%;
     }
 
+    /* แสดงรูกล้อง S25 Ultra ไว้ตามเดิม */
     .punch-hole {
-        display: none;
+        display: block;
     }
 }
