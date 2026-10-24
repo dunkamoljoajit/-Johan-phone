@@ -111,53 +111,23 @@ body {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
 }
-/* การตั้งค่าพื้นฐานสำหรับแสดงบนคอมพิวเตอร์ (จอใหญ่) */
-body {
-    background-color: #e5e7eb; /* สีพื้นหลังจอคอม */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-}
-
-.phone-frame {
-    width: 360px;
-    height: 780px;
-    background-color: #000;
-    border-radius: 40px;
-    padding: 12px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    position: relative;
-    overflow: hidden;
-}
-
-.screen {
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    border-radius: 32px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
 
 /* =========================================
    ส่วนตั้งค่า Responsive สำหรับหน้าจอมือถือ
 ========================================= */
 @media (max-width: 480px) {
     body {
-        background-color: #fff; /* เปลี่ยนพื้นหลังให้กลืนกับแอป */
-        display: block; /* ยกเลิกการจัดกลาง */
+        background-color: #fff;
+        display: block;
     }
 
     .phone-frame {
         width: 100vw;
-        height: 100dvh; /* ใช้ 100dvh เพื่อให้พอดีกับจอมือถือจริงๆ แม้จะมีแถบ URL */
+        height: 100dvh;
         border-radius: 0;
         padding: 0;
         box-shadow: none;
+        background: none;
     }
 
     .screen {
@@ -165,7 +135,6 @@ body {
         height: 100dvh;
     }
 
-    /* ซ่อนรูกล้อง (Punch hole) เมื่อเปิดบนมือถือจริง เพราะมือถือมีกล้องของมันเองอยู่แล้ว */
     .punch-hole {
         display: none;
     }
