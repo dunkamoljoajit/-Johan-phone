@@ -33,7 +33,7 @@ const i18n = {
         arthitMsg1: "โจทำไรอยู่", arthitMsg2: "มึงอ่านแล้วตอบหน่อยสิโจ", arthitMsg3: "มึงไม่ตอบกูเลยนะโจ", arthitMsg4: "น่ารำคาญ",
         arthitMsg5: "มึงไปกวนอะไรนอร์ธ", arthitMsg6: "ก็มึงไม่ตอบกูอะโจ", arthitMsg7: "แถมบล็อกกูอีก", arthitMsg8: "โจตังกูไม่พอว่ะ โอนให้หน่อย",
         arthitMsg9: "เออไอสัส", arthitMsg10: "มีอะไรก็ว่ามา", arthitMsg11: "เดี๋ยวกูต้องไปทานข้าวเที่ยงกับนอร์ธแล้ว", arthitMsg12: "นี่มึงจนขนาดขอตังค์กูเลยเหรอทิตย์",
-        arthitMsg13: "โอนมาเหอะโจ เดี๋ยวมึงไปทานข้าวเที่ยงกับนอร์ธไม่ทันนะ และอย่าคิดบล็อกกู เพราะกูจะทักไปกวนมึงไม่จบไม่สิ้นแน่",
+        arthitMsg13: "โอนมาเหอะโจ เดี๋ยวมึงไปทานข้าวเที่ยงกับนอร์ธไม่ทันนะ และอย่าคิดบล็อกกู เพราะกูจะทักไปกวนเมียมึงไม่จบไม่สิ้นแน่",
         arthitMsg14: "ส่งสลิป", arthitMsg15: "พอใจมึงแล้วใช่ไหมทิตย์", arthitMsg16: "เออ ก็แค่นี้",
 
         northMsg1: "ตอนเย็นพี่ไปรับนะ", northMsg2: "มีประชุมไม่ใช่เหรอครับ เหมือนพี่ปรางจะบอกนอร์ธนะ",
@@ -68,7 +68,7 @@ const i18n = {
         arthitMsg1: "Jo, what are you doing?", arthitMsg2: "Read and reply to me, Jo.", arthitMsg3: "You're seriously ignoring me, Jo.", arthitMsg4: "Fucking annoying.",
         arthitMsg5: "Why the hell are you bothering North?", arthitMsg6: "Because you weren't answering me, Jo.", arthitMsg7: "And you even blocked me.", arthitMsg8: "Jo, I'm short on cash. Transfer some to me.",
         arthitMsg9: "Yeah, you bastard.", arthitMsg10: "Just spit it out.", arthitMsg11: "I have to go have lunch with North soon.", arthitMsg12: "Are you really so broke that you have to beg me for money, Thit?",
-        arthitMsg13: "Just transfer it, Jo. Otherwise you'll be late for your lunch with North. And don't even think about blocking me, or I'll harass you endlessly.",
+        arthitMsg13: "Just transfer it, Jo. Otherwise you'll be late for your lunch with North. And don't even think about blocking me, or I'll harass your wife endlessly.",
         arthitMsg14: "Send slip", arthitMsg15: "Are you satisfied now, Thit?", arthitMsg16: "Yeah, that's more like it.",
 
         northMsg1: "I'll pick you up this evening.", northMsg2: "Don't you have a meeting? I thought P'Prang mentioned it to North.",
@@ -103,7 +103,7 @@ const i18n = {
         arthitMsg1: "조, 뭐 하냐?", arthitMsg2: "읽었으면 대답 좀 해라, 조.", arthitMsg3: "내 연락 아예 씹네, 조.", arthitMsg4: "아, 짜증 나게.",
         arthitMsg5: "너 왜 노스한테 지랄이야?", arthitMsg6: "네가 내 연락 안 받으니까 그렇지, 조.", arthitMsg7: "게다가 나 차단까지 했잖아.", arthitMsg8: "조, 나 돈 쪼들려. 좀 보내라.",
         arthitMsg9: "그래 이 새끼야.", arthitMsg10: "할 말 있으면 해.", arthitMsg11: "나 곧 노스랑 점심 먹으러 가야 되니까.", arthitMsg12: "너 나한테 돈 구걸할 정도로 거지냐, 팃?",
-        arthitMsg13: "그냥 보내라, 조. 안 그러면 너 노스랑 점심 먹는 거 늦어진다. 그리고 차단할 생각 마, 끝까지 귀찮게 할 테니까.",
+        arthitMsg13: "그냥 보내라, 조. 안 그러면 너 노스랑 점심 먹는 거 늦어진다. 그리고 차단할 생각 마, 네 마누라 끝까지 귀찮게 할 테니까.",
         arthitMsg14: "송금표 전송", arthitMsg15: "이제 만족하냐, 팃?", arthitMsg16: "어, 이 정도면 됐어.",
 
         northMsg1: "저녁에 형이 데리러 갈게.", northMsg2: "미팅 있지 않아요? 프랑 누나가 노스한테 그렇게 말한 것 같은데.",
@@ -138,7 +138,7 @@ const i18n = {
         arthitMsg1: "ジョー、何してる？", arthitMsg2: "既読無視してないで返事しろよ、ジョー。", arthitMsg3: "完全に無視かよ、ジョー。", arthitMsg4: "マジうざい。",
         arthitMsg5: "お前、なんでノースに絡んでんだよ？", arthitMsg6: "お前が返事しないからだろ、ジョー。", arthitMsg7: "そのうえブロックまでしやがって。", arthitMsg8: "ジョー、金がねぇわ。ちょっと振り込んでくれ。",
         arthitMsg9: "ああ、クソ野郎。", arthitMsg10: "用があるならさっさと言え。", arthitMsg11: "もうすぐノースと昼飯に行かなきゃならないんだよ。", arthitMsg12: "お前、俺に金せびるほど金欠なのかよ、ティット？",
-        arthitMsg13: "さっさと振り込めよ、ジョー。じゃないとノースとの昼飯に遅れるぞ。それにブロックしようとか考えるなよ、いつまでも付きまとってやるからな。",
+        arthitMsg13: "さっさと振り込めよ、ジョー。じゃないとノースとの昼飯に遅れるぞ。それにブロックしようとか考えるなよ、お前の嫁にいつまでも付きまとってやるからな。",
         arthitMsg14: "送金明細を送る", arthitMsg15: "これで満足か、ティット？", arthitMsg16: "ああ、これでいいんだよ。",
 
         northMsg1: "夕方、迎えに行くね。", northMsg2: "会議じゃなかったですか？プラーン先輩がノースにそう言ってた気がするけど。",
@@ -166,14 +166,14 @@ const i18n = {
         xUserName: 'North', xPostContent: '天哪，今天潘纳维又在楼下等玛塔娜了！那眼神简直太甜了吧！💖', xViewTranslate: '查看翻译', igAppName: 'Instagram',
         lineTitle: 'LINE 聊天', lineTabChat: '聊天', lineTabFriend: '好友', lineTabGroup: '群组', lineChat1Msg: '烦人的家伙，我直接把他拉黑了。待会儿房间见。', lineChat2Msg: '你已屏蔽 Arthit', lineChat3Msg: '新消息',
         kbankAcc: '我的账户', kbankBalanceLabel: '可用余额', kbankTransfer: '转账', kbankScan: '扫码', kbankTopup: '充值', kbankAll: '全部', kbankFav: '收藏夹', kbankEdit: '编辑', kbankRecent: '最近交易', kbankTx1: '转账给 North', kbankTx2: '商品付款 (购物)', kbankTx3: '商品付款 (佣金)', kbankModalTitle: '转账 / 付款', kbankAmountLabel: '金额 (THB)', kbankConfirmBtn: '确认转账',
-        stocksTitle: '投资组合', stocksWatchlist: '关注列表', stocksUsMarket: '美国市场', stocksBuy: '买入', stocksSell: '卖出',
+        stocksTitle: '投资组合', stocksWatchlist: '关注列表', stocksUsMarket: '美国市场', stocksBuy: '买入', stocks Sell: '卖出',
         toastPhone: '电话', toastInternet: '网页', toastCamera: '相机', toastStore: '商店', toastNewAlbum: '新相册', toastSearch: '搜索', toastMore: '更多', toastEditor: 'AI照片编辑器', toastShare: '快速分享', toastDeleted: '已删除', toastSimOnly: '仅模拟交易', toastChatSearch: '搜索聊天', toastAddFriend: '添加好友 / 创建群组',
         viewerFav: '收藏', viewerEdit: '编辑', viewerShare: '分享', viewerDelete: '删除', albumTitles: { camera: '相机', favorites: '收藏夹', screenshots: 'Pre wedding', downloads: '下载' },
 
         arthitMsg1: "Jo，你在干嘛？", arthitMsg2: "看了就回一下消息啊，Jo。", arthitMsg3: "你根本不回我消息啊，Jo。", arthitMsg4: "真他妈烦人。",
         arthitMsg5: "你去打扰North干嘛？", arthitMsg6: "还不是因为你不回我消息，Jo。", arthitMsg7: "而且你还把我拉黑了。", arthitMsg8: "Jo，我手头紧，转点钱给我。",
         arthitMsg9: "行，你个混蛋。", arthitMsg10: "有什么事快说。", arthitMsg11: "我一会儿得去跟North吃午饭了。", arthitMsg12: "你穷到要跟我要钱的地步了吗，Thit？",
-        arthitMsg13: "赶紧转过来吧，Jo。不然你跟North吃午饭该迟到了。还有别想着拉黑我，不然我没完没了地烦你。",
+        arthitMsg13: "赶紧转过来吧，Jo。不然你跟North吃午饭该迟到了。还有别想着拉黑我，不然我没完没了地去烦你老婆。",
         arthitMsg14: "发送转账凭证", arthitMsg15: "这下你满意了吧，Thit？", arthitMsg16: "行，这就对了。",
 
         northMsg1: "傍晚我去接你吧。", northMsg2: "不是有会议吗？Prang姐好像跟North说过。",
@@ -192,7 +192,6 @@ const i18n = {
         northMsg19: "为什么不直接告诉North呢，Jo哥？", northMsg20: "那是个烦人的家伙，我直接拉黑了事。房间见哦。"
     }
 };
-
 // ============================================
 // ฟังก์ชันจัดการภาษา (Language & UI Translation)
 // ============================================
