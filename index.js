@@ -10,54 +10,186 @@ let currentViewerIndex = 0;
 let touchStartX = 0;
 let touchEndX = 0;
 
-// พจนานุกรมแปลภาษา 5 ภาษาแบบสมบูรณ์
+// พจนานุกรมแปลภาษา 5 ภาษาแบบสมบูรณ์ (ครอบคลุมทุกแอป)
 const i18n = {
     th: {
-        galleryTitle: 'แกลเลอรี', tabPictures: 'รูปภาพ', tabAlbums: 'อัลบั้ม', itemsSuffix: 'รายการ', today: 'วันนี้', yesterday: 'เมื่อวานนี้', noPhotos: 'ยังไม่มีรูปภาพ', favAdded: 'เพิ่มในรายการโปรดแล้ว', favRemoved: 'ลบออกจากรายการโปรด', langSelectedMsg: 'เลือกภาษาไทยเรียบร้อย', appNameGallery: 'แกลเลอรี', appNameMessages: 'ข้อความ', city: 'กรุงเทพมหานคร', weatherDesc: 'แดดจัด · สูงสุด 33°', summaryTitle: 'สรุปช่วงกลางวัน', searchPlaceholder: 'ค้นหา...', recentsTitle: 'แอปล่าสุด', recentsClear: 'ปิดทั้งหมด', recentsHome: 'กลับไปหน้าหลัก', noRecents: 'ไม่มีแอปล่าสุด', recentTapToOpen: 'แตะเพื่อกลับไปเปิด',
+        galleryTitle: 'แกลเลอรี', tabPictures: 'รูปภาพ', tabAlbums: 'อัลบั้ม', itemsSuffix: 'รายการ', today: 'วันนี้', yesterday: 'เมื่อวานนี้', noPhotos: 'ยังไม่มีรูปภาพ', favAdded: 'เพิ่มในรายการโปรดแล้ว', favRemoved: 'ลบออกจากรายการโปรด', langSelectedMsg: 'เลือกภาษาไทยเรียบร้อย', appNameGallery: 'แกลเลอรี', appNameMessages: 'ข้อความ', appNameIg: 'Instagram', appNameLine: 'LINE', appNameKbank: 'K PLUS', appNameStore: 'Store', appNameStocks: 'หุ้น',
+        city: 'กรุงเทพมหานคร', weatherDesc: 'แดดจัด · สูงสุด 33°', summaryTitle: 'สรุปช่วงกลางวัน', searchPlaceholder: 'ค้นหา...', recentsTitle: 'แอปล่าสุด', recentsClear: 'ปิดทั้งหมด', recentsHome: 'กลับไปหน้าหลัก', noRecents: 'ไม่มีแอปล่าสุด', recentTapToOpen: 'แตะเพื่อกลับไปเปิด',
         msgContactName: 'North', msgContactStatus: 'ใช้งานเมื่อครู่นี้', 
         msgDate1: 'เมื่อวาน 08:30 น.', msgOld1: 'มอนิ่งครับ วันนี้มีเรียนเช้าไหม?', msgOld2: 'มีครับ 10 โมง', msgOld3: 'ตั้งใจเรียนนะ เลิกแล้วทักมา', msgOld4: 'ค้าบบบ พี่ก็สู้ๆ นะ ✌️',
         msgDate2: 'วันนี้ 12:15 น.', msgOld5: 'พักเที่ยงแล้ว กินอะไรหรือยัง?', msgOld6: 'กินก๋วยเตี๋ยวหน้ามอครับ อร่อยมากก 🍜',
         msgDateHeader: 'วันนี้ 16:30 น.', msgOutgoing: 'เลิกเรียนเดี๋ยวพี่ไปรับน่ะ', msgIncoming: 'ครับ รับทราบ',
-        xUserName: 'North', xPostContent: 'My Wedding 💖 @j',
+        xUserName: 'North', xPostContent: 'แกกกก วันนี้เห็นคุณปัณณวิชญ์มารอรับน้องมัทธนาที่หน้าตึกอีกแล้วว สายตาที่มองคือหวานเจี๊ยบ! 💖', xViewTranslate: 'ดูคำแปล', igAppName: 'Instagram',
+        lineTitle: 'แชท LINE', lineTabChat: 'แชท', lineTabFriend: 'เพื่อน', lineTabGroup: 'กลุ่ม', lineChat1Msg: 'มันตัวน่ารำคาญนะครับ พี่เลยบล็อกไปให้จบ ๆ เจอกันที่ห้องน่ะ', lineChat2Msg: 'You block Arthit', lineChat3Msg: 'มีข้อความใหม่',
+        kbankAcc: 'บัญชีของฉัน', kbankBalanceLabel: 'ยอดเงินคงเหลือ', kbankTransfer: 'โอนเงิน', kbankScan: 'สแกนจ่าย', kbankTopup: 'เติมเงิน', kbankAll: 'ทั้งหมด', kbankFav: 'รายการโปรด', kbankEdit: 'แก้ไข', kbankRecent: 'รายการล่าสุด', kbankTx1: 'โอนเงินให้ North', kbankTx2: 'ชำระค่าสินค้า (ซื้อของ)', kbankTx3: 'ชำระค่าสินค้า (ค่าคอม)', kbankModalTitle: 'โอนเงิน / ชำระเงิน', kbankAmountLabel: 'จำนวนเงิน (บาท)', kbankConfirmBtn: 'ยืนยันการโอนเงิน',
+        stocksTitle: 'พอร์ตลงทุน', stocksWatchlist: 'รายการที่ติดตาม', stocksUsMarket: 'ตลาดหุ้นสหรัฐฯ', stocksBuy: 'ซื้อ', stocksSell: 'ขาย',
+        toastPhone: 'โทรศัพท์', toastInternet: 'อินเทอร์เน็ต', toastCamera: 'กล้อง', toastStore: 'สโตร์', toastNewAlbum: 'อัลบั้มใหม่', toastSearch: 'ค้นหา', toastMore: 'เพิ่มเติม', toastEditor: 'เครื่องมือแต่งภาพ AI', toastShare: 'แชร์ด่วน', toastDeleted: 'ลบแล้ว', toastSimOnly: 'หน้าซื้อขายจำลองเท่านั้น', toastChatSearch: 'ค้นหาแชท', toastAddFriend: 'เพิ่มเพื่อน / สร้างกลุ่ม',
         viewerFav: 'โปรด', viewerEdit: 'แก้ไข', viewerShare: 'แชร์', viewerDelete: 'ลบ', albumTitles: { camera: 'กล้อง', favorites: 'รายการโปรด', screenshots: 'Pre wedding', downloads: 'ดาวน์โหลด' }
     },
     en: {
-        galleryTitle: 'Gallery', tabPictures: 'Pictures', tabAlbums: 'Albums', itemsSuffix: 'items', today: 'Today', yesterday: 'Yesterday', noPhotos: 'No photos yet', favAdded: 'Added to favorites', favRemoved: 'Removed from favorites', langSelectedMsg: 'English selected', appNameGallery: 'Gallery', appNameMessages: 'Messages', city: 'Bangkok', weatherDesc: 'Sunny · H: 33°', summaryTitle: 'Day Summary', searchPlaceholder: 'Search...', recentsTitle: 'Recent Apps', recentsClear: 'Clear All', recentsHome: 'Back to Home', noRecents: 'No recent apps', recentTapToOpen: 'Tap to open',
+        galleryTitle: 'Gallery', tabPictures: 'Pictures', tabAlbums: 'Albums', itemsSuffix: 'items', today: 'Today', yesterday: 'Yesterday', noPhotos: 'No photos yet', favAdded: 'Added to favorites', favRemoved: 'Removed from favorites', langSelectedMsg: 'English selected', appNameGallery: 'Gallery', appNameMessages: 'Messages', appNameIg: 'Instagram', appNameLine: 'LINE', appNameKbank: 'K PLUS', appNameStore: 'Store', appNameStocks: 'Stocks',
+        city: 'Bangkok', weatherDesc: 'Sunny · H: 33°', summaryTitle: 'Day Summary', searchPlaceholder: 'Search...', recentsTitle: 'Recent Apps', recentsClear: 'Clear All', recentsHome: 'Back to Home', noRecents: 'No recent apps', recentTapToOpen: 'Tap to open',
         msgContactName: 'North', msgContactStatus: 'Active just now',
         msgDate1: 'Yesterday 08:30', msgOld1: 'Morning! Do you have morning classes today?', msgOld2: 'Yes, at 10 AM.', msgOld3: 'Study hard! Text me when you are done.', msgOld4: 'Will do! You do your best too ✌️',
         msgDate2: 'Today 12:15', msgOld5: 'Lunch break! Have you eaten?', msgOld6: 'Had noodles in front of uni. So good 🍜',
         msgDateHeader: 'Today 16:30', msgOutgoing: "I'll pick you up after class.", msgIncoming: 'Okay, got it.',
-        xUserName: 'North', xPostContent: 'My Wedding 💖 @j',
+        xUserName: 'North', xPostContent: 'Omg today Pannawit came to wait for Matthana in front of the building again! So sweet! 💖', xViewTranslate: 'See translation', igAppName: 'Instagram',
+        lineTitle: 'LINE Chat', lineTabChat: 'Chats', lineTabFriend: 'Friends', lineTabGroup: 'Groups', lineChat1Msg: 'He is annoying, so I blocked him. See you in the room.', lineChat2Msg: 'You block Arthit', lineChat3Msg: 'New message',
+        kbankAcc: 'My Account', kbankBalanceLabel: 'Available Balance', kbankTransfer: 'Transfer', kbankScan: 'Scan QR', kbankTopup: 'Top Up', kbankAll: 'All', kbankFav: 'Favorites', kbankEdit: 'Edit', kbankRecent: 'Recent Transactions', kbankTx1: 'Transfer to North', kbankTx2: 'Payment (Shopping)', kbankTx3: 'Payment (Commission)', kbankModalTitle: 'Transfer / Payment', kbankAmountLabel: 'Amount (THB)', kbankConfirmBtn: 'Confirm Transfer',
+        stocksTitle: 'Portfolio', stocksWatchlist: 'Watchlist', stocksUsMarket: 'US Market', stocksBuy: 'Buy', stocksSell: 'Sell',
+        toastPhone: 'Phone', toastInternet: 'Internet', toastCamera: 'Camera', toastStore: 'Store', toastNewAlbum: 'New Album', toastSearch: 'Search', toastMore: 'More', toastEditor: 'AI Photo Editor', toastShare: 'Quick Share', toastDeleted: 'Deleted', toastSimOnly: 'Simulation only', toastChatSearch: 'Search chats', toastAddFriend: 'Add Friend / Create Group',
         viewerFav: 'Fav', viewerEdit: 'Edit', viewerShare: 'Share', viewerDelete: 'Delete', albumTitles: { camera: 'Camera', favorites: 'Favorites', screenshots: 'Pre wedding', downloads: 'Downloads' }
     },
     ko: {
-        galleryTitle: '갤러리', tabPictures: '사진', tabAlbums: '앨범', itemsSuffix: '항목', today: '오늘', yesterday: '어제', noPhotos: '사진 없음', favAdded: '즐겨찾기에 추가됨', favRemoved: '즐겨찾기에서 삭제됨', langSelectedMsg: '한국어가 선택되었습니다', appNameGallery: '갤러리', appNameMessages: '메시지', city: '방콕', weatherDesc: '맑음 · 최고 33°', summaryTitle: '오늘의 요약', searchPlaceholder: '검색...', recentsTitle: '최근 앱', recentsClear: '모두 닫기', recentsHome: '홈으로 이동', noRecents: '최근 앱 없음', recentTapToOpen: '탭하여 열기',
+        galleryTitle: '갤러리', tabPictures: '사진', tabAlbums: '앨범', itemsSuffix: '항목', today: '오늘', yesterday: '어제', noPhotos: '사진 없음', favAdded: '즐겨찾기에 추가됨', favRemoved: '즐겨찾기에서 삭제됨', langSelectedMsg: '한국어가 선택되었습니다', appNameGallery: '갤러리', appNameMessages: '메시지', appNameIg: 'Instagram', appNameLine: 'LINE', appNameKbank: 'K PLUS', appNameStore: '스토어', appNameStocks: '주식',
+        city: '방콕', weatherDesc: '맑음 · 최고 33°', summaryTitle: '오늘의 요약', searchPlaceholder: '검색...', recentsTitle: '최근 앱', recentsClear: '모두 닫기', recentsHome: '홈으로 이동', noRecents: '최근 앱 없음', recentTapToOpen: '탭하여 열기',
         msgContactName: 'North', msgContactStatus: '방금 전 활동',
         msgDate1: '어제 08:30', msgOld1: '좋은 아침! 오늘 오전 수업 있어?', msgOld2: '네, 10시요.', msgOld3: '공부 열심히 해! 끝나면 연락하고.', msgOld4: '네! 형도 화이팅 ✌️',
         msgDate2: '오늘 12:15', msgOld5: '점심시간이네! 밥 먹었어?', msgOld6: '학교 앞 국수 먹었어요. 진짜 맛있어요 🍜',
         msgDateHeader: '오늘 16:30', msgOutgoing: '수업 끝나면 데리러 갈게.', msgIncoming: '네, 알겠습니다.',
-        xUserName: 'North', xPostContent: 'My Wedding 💖 @j',
+        xUserName: 'North', xPostContent: '오늘 판나윗이 건물 앞에서 기다리고 있었어! 너무 달달해! 💖', xViewTranslate: '번역 보기', igAppName: 'Instagram',
+        lineTitle: 'LINE 채팅', lineTabChat: '채팅', lineTabFriend: '친구', lineTabGroup: '그룹', lineChat1Msg: '귀찮은 녀석이라 차단했어. 방에서 보자.', lineChat2Msg: 'You block Arthit', lineChat3Msg: '새 메시지',
+        kbankAcc: '내 계좌', kbankBalanceLabel: '잔액', kbankTransfer: '이체', kbankScan: 'QR 스캔', kbankTopup: '충전', kbankAll: '전체', kbankFav: '즐겨찾기', kbankEdit: '편집', kbankRecent: '최근 거래', kbankTx1: 'North에게 이체', kbankTx2: '상품 결제 (쇼핑)', kbankTx3: '상품 결제 (수수료)', kbankModalTitle: '이체 / 결제', kbankAmountLabel: '금액 (THB)', kbankConfirmBtn: '이체 확인',
+        stocksTitle: '투자 포트폴리오', stocksWatchlist: '관심 종목', stocksUsMarket: '미국 시장', stocksBuy: '매수', stocksSell: '매도',
+        toastPhone: '전화', toastInternet: '인터넷', toastCamera: '카메라', toastStore: '스토어', toastNewAlbum: '새 앨범', toastSearch: '검색', toastMore: '더보기', toastEditor: 'AI 사진 편집기', toastShare: '퀵 공유', toastDeleted: '삭제됨', toastSimOnly: '시뮬레이션 전용', toastChatSearch: '채팅 검색', toastAddFriend: '친구 추가 / 그룹 생성',
         viewerFav: '즐겨찾기', viewerEdit: '편집', viewerShare: '공유', viewerDelete: '삭제', albumTitles: { camera: '카메라', favorites: '즐겨찾기', screenshots: 'Pre wedding', downloads: '다운로드' }
     },
     ja: {
-        galleryTitle: 'ギャラリー', tabPictures: '写真', tabAlbums: 'アルバム', itemsSuffix: '件', today: '今日', yesterday: '昨日', noPhotos: '写真はありません', favAdded: 'お気に入りに追加しました', favRemoved: 'お気に入りから削除しました', langSelectedMsg: '日本語が選択されました', appNameGallery: 'ギャラリー', appNameMessages: 'メッセージ', city: 'バンコク', weatherDesc: '晴れ · 最高 33°', summaryTitle: '今日の概要', searchPlaceholder: '検索...', recentsTitle: '最近のアプリ', recentsClear: 'すべて閉じる', recentsHome: 'ホームへ戻る', noRecents: '最近のアプリはありません', recentTapToOpen: 'タップして開く',
+        galleryTitle: 'ギャラリー', tabPictures: '写真', tabAlbums: 'アルバム', itemsSuffix: '件', today: '今日', yesterday: '昨日', noPhotos: '写真はありません', favAdded: 'お気に入りに追加しました', favRemoved: 'お気に入りから削除しました', langSelectedMsg: '日本語が選択されました', appNameGallery: 'ギャラリー', appNameMessages: 'メッセージ', appNameIg: 'Instagram', appNameLine: 'LINE', appNameKbank: 'K PLUS', appNameStore: 'ストア', appNameStocks: '株価',
+        city: 'バンコク', weatherDesc: '晴れ · 最高 33°', summaryTitle: '今日の概要', searchPlaceholder: '検索...', recentsTitle: '最近のアプリ', recentsClear: 'すべて閉じる', recentsHome: 'ホームへ戻る', noRecents: '最近のアプリはありません', recentTapToOpen: 'タップして開く',
         msgContactName: 'North', msgContactStatus: 'オンライン',
         msgDate1: '昨日 08:30', msgOld1: 'おはよう！今日午前授業ある？', msgOld2: 'はい、10時からです。', msgOld3: '勉強頑張ってね！終わったら連絡して。', msgOld4: 'はーい！先輩も頑張ってくださいね ✌️',
         msgDate2: '今日 12:15', msgOld5: 'お昼休みだね！ご飯食べた？', msgOld6: '大学の前で麺食べました。すごく美味しかったです 🍜',
         msgDateHeader: '今日 16:30', msgOutgoing: '授業が終わったら迎えに行くね。', msgIncoming: 'はい、了解です。',
-        xUserName: 'North', xPostContent: 'My Wedding 💖 @j',
+        xUserName: 'North', xPostContent: '今日パンナウィットが建物の前で待ってた！甘々すぎる！💖', xViewTranslate: '翻訳を見る', igAppName: 'Instagram',
+        lineTitle: 'LINE チャット', lineTabChat: 'チャット', lineTabFriend: '友達', lineTabGroup: 'グループ', lineChat1Msg: '面倒な奴だからブロックしたよ。部屋で会おう。', lineChat2Msg: 'You block Arthit', lineChat3Msg: '新着メッセージ',
+        kbankAcc: 'マイ口座', kbankBalanceLabel: '利用可能残高', kbankTransfer: '振込', kbankScan: 'QRスキャン', kbankTopup: 'チャージ', kbankAll: 'すべて', kbankFav: 'お気に入り', kbankEdit: '編集', kbankRecent: '最近の取引', kbankTx1: 'Northへ振込', kbankTx2: '商品支払い (ショッピング)', kbankTx3: '商品支払い (手数料)', kbankModalTitle: '振込 / 支払い', kbankAmountLabel: '金額 (THB)', kbankConfirmBtn: '振込を確認',
+        stocksTitle: 'ポートフォリオ', stocksWatchlist: 'ウォッチリスト', stocksUsMarket: '米国市場', stocksBuy: '買付', stocksSell: '売却',
+        toastPhone: '電話', toastInternet: 'インターネット', toastCamera: 'カメラ', toastStore: 'ストア', toastNewAlbum: '新規アルバム', toastSearch: '検索', toastMore: 'その他', toastEditor: 'AI写真エディタ', toastShare: 'クイック共有', toastDeleted: '削除済み', toastSimOnly: 'シミュレーション専用', toastChatSearch: 'チャット検索', toastAddFriend: '友達追加 / グループ作成',
         viewerFav: 'お気に入り', viewerEdit: '編集', viewerShare: '共有', viewerDelete: '削除', albumTitles: { camera: 'カメラ', favorites: 'お気に入り', screenshots: 'Pre wedding', downloads: 'ダウンロード' }
     },
     zh: {
-        galleryTitle: '相册', tabPictures: '照片', tabAlbums: '相册', itemsSuffix: '项目', today: '今天', yesterday: '昨天', noPhotos: '暂无照片', favAdded: '已添加到收藏夹', favRemoved: '已从收藏夹移除', langSelectedMsg: '已选择中文', appNameGallery: '相册', appNameMessages: '信息', city: '曼谷', weatherDesc: '晴朗 · 最高 33°', summaryTitle: '今日摘要', searchPlaceholder: '搜索...', recentsTitle: '最近使用的应用', recentsClear: '全部关闭', recentsHome: '返回主屏幕', noRecents: '没有最近使用的应用', recentTapToOpen: '点击打开',
+        galleryTitle: '相册', tabPictures: '照片', tabAlbums: '相册', itemsSuffix: '项目', today: '今天', yesterday: '昨天', noPhotos: '暂无照片', favAdded: '已添加到收藏夹', favRemoved: '已从收藏夹移除', langSelectedMsg: '已选择中文', appNameGallery: '相册', appNameMessages: '信息', appNameIg: 'Instagram', appNameLine: 'LINE', appNameKbank: 'K PLUS', appNameStore: '商店', appNameStocks: '股票',
+        city: '曼谷', weatherDesc: '晴朗 · 最高 33°', summaryTitle: '今日摘要', searchPlaceholder: '搜索...', recentsTitle: '最近使用的应用', recentsClear: '全部关闭', recentsHome: '返回主屏幕', noRecents: '没有最近使用的应用', recentTapToOpen: '点击打开',
         msgContactName: 'North', msgContactStatus: '刚刚在线',
         msgDate1: '昨天 08:30', msgOld1: '早上好！今天有早课吗？', msgOld2: '有的，10点。', msgOld3: '好好学习！下课发信息给我。', msgOld4: '好的！哥你也加油 ✌️',
         msgDate2: '今天 12:15', msgOld5: '午休啦！吃饭了吗？', msgOld6: '在学校门口吃了面条，超好吃 🍜',
         msgDateHeader: '今天 16:30', msgOutgoing: '下课后我去接你。', msgIncoming: '好的，知道了。',
-        xUserName: 'North', xPostContent: 'My Wedding 💖 @j',
+        xUserName: 'North', xPostContent: '今天潘纳维在楼下等玛塔娜！太甜了吧！💖', xViewTranslate: '查看翻译', igAppName: 'Instagram',
+        lineTitle: 'LINE 聊天', lineTabChat: '聊天', lineTabFriend: '好友', lineTabGroup: '群组', lineChat1Msg: '烦人的家伙，我把他拉黑了。待会儿房间见。', lineChat2Msg: 'You block Arthit', lineChat3Msg: '新消息',
+        kbankAcc: '我的账户', kbankBalanceLabel: '可用余额', kbankTransfer: '转账', kbankScan: '扫码', kbankTopup: '充值', kbankAll: '全部', kbankFav: '收藏夹', kbankEdit: '编辑', kbankRecent: '最近交易', kbankTx1: '转账给 North', kbankTx2: '商品付款 (购物)', kbankTx3: '商品付款 (佣金)', kbankModalTitle: '转账 / 付款', kbankAmountLabel: '金额 (THB)', kbankConfirmBtn: '确认转账',
+        stocksTitle: '投资组合', stocksWatchlist: '关注列表', stocksUsMarket: '美国市场', stocksBuy: '买入', stocksSell: '卖出',
+        toastPhone: '电话', toastInternet: '网页', toastCamera: '相机', toastStore: '商店', toastNewAlbum: '新相册', toastSearch: '搜索', toastMore: '更多', toastEditor: 'AI照片编辑器', toastShare: '快速分享', toastDeleted: '已删除', toastSimOnly: '仅模拟交易', toastChatSearch: '搜索聊天', toastAddFriend: '添加好友 / 创建群组',
         viewerFav: '收藏', viewerEdit: '编辑', viewerShare: '分享', viewerDelete: '删除', albumTitles: { camera: '相机', favorites: '收藏夹', screenshots: 'Pre wedding', downloads: '下载' }
     }
 };
+
+// อัปเดตฟังก์ชันเลือกภาษาและบันทึกค่าลง localStorage เพื่อส่งต่อไปยังหน้าแชทย่อย
+function chooseInitialLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('sim_lang', lang); // บันทึกภาษาลง LocalStorage
+    
+    const langBtnText = document.getElementById('lang-btn-text');
+    if (langBtnText) langBtnText.innerText = currentLang.toUpperCase();
+
+    updateStaticUIText();
+    renderPicturesTab();
+    renderAlbumsGrid();
+
+    const modal = document.getElementById('lang-select-modal');
+    if (modal) modal.classList.add('hidden');
+
+    showToast(i18n[currentLang].langSelectedMsg);
+}
+
+// ฟังก์ชันปรับเปลี่ยนข้อความภาษาทั้งหมดบนหน้าจอ (UI, Messages, Widgets, K PLUS, LINE, IG, Stocks)
+function updateStaticUIText() {
+    const txt = i18n[currentLang];
+    
+    // Gallery UI
+    if (document.getElementById('ui-gallery-title')) document.getElementById('ui-gallery-title').innerText = txt.galleryTitle;
+    if (document.getElementById('tab-btn-pictures')) document.getElementById('tab-btn-pictures').innerText = txt.tabPictures;
+    if (document.getElementById('tab-btn-albums')) document.getElementById('tab-btn-albums').innerText = txt.tabAlbums;
+
+    // Photo Viewer Actions
+    if (document.getElementById('viewer-lbl-fav')) document.getElementById('viewer-lbl-fav').innerText = txt.viewerFav;
+    if (document.getElementById('viewer-lbl-edit')) document.getElementById('viewer-lbl-edit').innerText = txt.viewerEdit;
+    if (document.getElementById('viewer-lbl-share')) document.getElementById('viewer-lbl-share').innerText = txt.viewerShare;
+    if (document.getElementById('viewer-lbl-delete')) document.getElementById('viewer-lbl-delete').innerText = txt.viewerDelete;
+
+    // Home Screen App Labels & Widgets
+    if (document.getElementById('app-label-gallery')) document.getElementById('app-label-gallery').innerText = txt.appNameGallery;
+    if (document.getElementById('app-label-messages')) document.getElementById('app-label-messages').innerText = txt.appNameMessages;
+    if (document.getElementById('app-label-ig')) document.getElementById('app-label-ig').innerText = txt.appNameIg;
+    if (document.getElementById('app-label-line')) document.getElementById('app-label-line').innerText = txt.appNameLine;
+    if (document.getElementById('app-label-kbank')) document.getElementById('app-label-kbank').innerText = txt.appNameKbank;
+    if (document.getElementById('app-label-stocks')) document.getElementById('app-label-stocks').innerText = txt.appNameStocks;
+    if (document.getElementById('app-label-store')) document.getElementById('app-label-store').innerText = txt.appNameStore;
+
+    if (document.getElementById('widget-city')) document.getElementById('widget-city').innerText = txt.city;
+    if (document.getElementById('widget-weather-desc')) document.getElementById('widget-weather-desc').innerText = txt.weatherDesc;
+    if (document.getElementById('widget-summary')) document.getElementById('widget-summary').innerText = txt.summaryTitle;
+    if (document.getElementById('widget-search-placeholder')) document.getElementById('widget-search-placeholder').innerText = txt.searchPlaceholder;
+
+    // Recents Overlay
+    if (document.getElementById('recents-title')) document.getElementById('recents-title').innerText = txt.recentsTitle;
+    if (document.getElementById('recents-clear-btn')) document.getElementById('recents-clear-btn').innerText = txt.recentsClear;
+    if (document.getElementById('recents-home-btn')) document.getElementById('recents-home-btn').innerText = txt.recentsHome;
+
+    // Messages App
+    if (document.getElementById('msg-contact-name')) document.getElementById('msg-contact-name').innerText = txt.msgContactName;
+    if (document.getElementById('msg-contact-status')) document.getElementById('msg-contact-status').innerText = txt.msgContactStatus;
+    if (document.getElementById('msg-date-1')) document.getElementById('msg-date-1').innerText = txt.msgDate1;
+    if (document.getElementById('msg-old-1')) document.getElementById('msg-old-1').innerText = txt.msgOld1;
+    if (document.getElementById('msg-old-2')) document.getElementById('msg-old-2').innerText = txt.msgOld2;
+    if (document.getElementById('msg-old-3')) document.getElementById('msg-old-3').innerText = txt.msgOld3;
+    if (document.getElementById('msg-old-4')) document.getElementById('msg-old-4').innerText = txt.msgOld4;
+    if (document.getElementById('msg-date-2')) document.getElementById('msg-date-2').innerText = txt.msgDate2;
+    if (document.getElementById('msg-old-5')) document.getElementById('msg-old-5').innerText = txt.msgOld5;
+    if (document.getElementById('msg-old-6')) document.getElementById('msg-old-6').innerText = txt.msgOld6;
+    if (document.getElementById('msg-date-header')) document.getElementById('msg-date-header').innerText = txt.msgDateHeader;
+    if (document.getElementById('msg-outgoing')) document.getElementById('msg-outgoing').innerText = txt.msgOutgoing;
+    if (document.getElementById('msg-incoming')) document.getElementById('msg-incoming').innerText = txt.msgIncoming;
+
+    // Instagram App
+    if (document.getElementById('ig-app-title')) document.getElementById('ig-app-title').innerText = txt.igAppName;
+    if (document.getElementById('x-user-name')) document.getElementById('x-user-name').innerText = txt.xUserName;
+    if (document.getElementById('x-post-content')) document.getElementById('x-post-content').innerHTML = txt.xPostContent;
+    if (document.getElementById('ig-view-translate')) document.getElementById('ig-view-translate').innerText = txt.xViewTranslate;
+
+    // LINE App
+    if (document.getElementById('line-title-text')) document.getElementById('line-title-text').innerHTML = `${txt.lineTabChat} <span class="text-[#06C755]">LINE</span>`;
+    if (document.getElementById('line-tab-chat')) document.getElementById('line-tab-chat').innerText = txt.lineTabChat;
+    if (document.getElementById('line-tab-friend')) document.getElementById('line-tab-friend').innerText = txt.lineTabFriend;
+    if (document.getElementById('line-tab-group')) document.getElementById('line-tab-group').innerText = txt.lineTabGroup;
+    if (document.getElementById('line-chat1-msg')) document.getElementById('line-chat1-msg').innerText = txt.lineChat1Msg;
+    if (document.getElementById('line-chat2-msg')) document.getElementById('line-chat2-msg').innerText = txt.lineChat2Msg;
+    if (document.getElementById('line-chat3-msg')) document.getElementById('line-chat3-msg').innerText = txt.lineChat3Msg;
+
+    // K PLUS App
+    if (document.getElementById('kbank-acc-label')) document.getElementById('kbank-acc-label').innerText = txt.kbankAcc;
+    if (document.getElementById('kbank-bal-label')) document.getElementById('kbank-bal-label').innerText = txt.kbankBalanceLabel;
+    if (document.getElementById('kbank-btn-transfer')) document.getElementById('kbank-btn-transfer').innerText = txt.kbankTransfer;
+    if (document.getElementById('kbank-btn-scan')) document.getElementById('kbank-btn-scan').innerText = txt.kbankScan;
+    if (document.getElementById('kbank-btn-topup')) document.getElementById('kbank-btn-topup').innerText = txt.kbankTopup;
+    if (document.getElementById('kbank-btn-all')) document.getElementById('kbank-btn-all').innerText = txt.kbankAll;
+    if (document.getElementById('kbank-fav-title')) document.getElementById('kbank-fav-title').innerText = txt.kbankFav;
+    if (document.getElementById('kbank-fav-edit')) document.getElementById('kbank-fav-edit').innerText = txt.kbankEdit;
+    if (document.getElementById('kbank-recent-title')) document.getElementById('kbank-recent-title').innerText = txt.kbankRecent;
+    if (document.getElementById('kbank-tx1-text')) document.getElementById('kbank-tx1-text').innerText = txt.kbankTx1;
+    if (document.getElementById('kbank-tx2-text')) document.getElementById('kbank-tx2-text').innerText = txt.kbankTx2;
+    if (document.getElementById('kbank-tx3-text')) document.getElementById('kbank-tx3-text').innerText = txt.kbankTx3;
+    if (document.getElementById('kbank-modal-title')) document.getElementById('kbank-modal-title').innerText = txt.kbankModalTitle;
+    if (document.getElementById('kbank-amount-label')) document.getElementById('kbank-amount-label').innerText = txt.kbankAmountLabel;
+    if (document.getElementById('kbank-confirm-btn')) document.getElementById('kbank-confirm-btn').innerText = txt.kbankConfirmBtn;
+
+    // Stocks App
+    if (document.getElementById('stocks-title')) document.getElementById('stocks-title').innerText = txt.stocksTitle;
+    if (document.getElementById('stocks-watchlist')) document.getElementById('stocks-watchlist').innerText = txt.stocksWatchlist;
+    if (document.getElementById('stocks-usmarket')) document.getElementById('stocks-usmarket').innerText = txt.stocksUsMarket;
+    if (document.getElementById('stocks-btn-buy')) document.getElementById('stocks-btn-buy').innerText = txt.stocksBuy;
+    if (document.getElementById('stocks-btn-sell')) document.getElementById('stocks-btn-sell').innerText = txt.stocksSell;
+}
 
 // Album Photos Database Data
 const albumData = {
