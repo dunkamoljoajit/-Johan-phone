@@ -166,7 +166,7 @@ const i18n = {
         xUserName: 'North', xPostContent: '天哪，今天潘纳维又在楼下等玛塔娜了！那眼神简直太甜了吧！💖', xViewTranslate: '查看翻译', igAppName: 'Instagram',
         lineTitle: 'LINE 聊天', lineTabChat: '聊天', lineTabFriend: '好友', lineTabGroup: '群组', lineChat1Msg: '烦人的家伙，我直接把他拉黑了。待会儿房间见。', lineChat2Msg: '你已屏蔽 Arthit', lineChat3Msg: '新消息',
         kbankAcc: '我的账户', kbankBalanceLabel: '可用余额', kbankTransfer: '转账', kbankScan: '扫码', kbankTopup: '充值', kbankAll: '全部', kbankFav: '收藏夹', kbankEdit: '编辑', kbankRecent: '最近交易', kbankTx1: '转账给 North', kbankTx2: '商品付款 (购物)', kbankTx3: '商品付款 (佣金)', kbankModalTitle: '转账 / 付款', kbankAmountLabel: '金额 (THB)', kbankConfirmBtn: '确认转账',
-        stocksTitle: '投资组合', stocksWatchlist: '关注列表', stocksUsMarket: '美国市场', stocksBuy: '买入', stocks Sell: '卖出',
+        stocksTitle: '投资组合', stocksWatchlist: '关注列表', stocksUsMarket: '美国市场', stocksBuy: '买入', stocksSell: '卖出',
         toastPhone: '电话', toastInternet: '网页', toastCamera: '相机', toastStore: '商店', toastNewAlbum: '新相册', toastSearch: '搜索', toastMore: '更多', toastEditor: 'AI照片编辑器', toastShare: '快速分享', toastDeleted: '已删除', toastSimOnly: '仅模拟交易', toastChatSearch: '搜索聊天', toastAddFriend: '添加好友 / 创建群组',
         viewerFav: '收藏', viewerEdit: '编辑', viewerShare: '分享', viewerDelete: '删除', albumTitles: { camera: '相机', favorites: '收藏夹', screenshots: 'Pre wedding', downloads: '下载' },
 
