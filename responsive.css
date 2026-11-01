@@ -1,0 +1,114 @@
+/* ==========================================================================
+   Responsive Stylesheet for Phone UI Simulator & App Frames
+   ========================================================================== */
+
+/* Global Box Sizing & Reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Body Container setup for perfect centering */
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0f0f11;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-family: 'Prompt', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Default Phone Frame Base (Galaxy S25 Ultra proportions ~375x812px) */
+.phone-frame {
+    width: 375px;
+    height: 812px;
+    max-width: 100vw;
+    max-height: 100dvh;
+    border-radius: 28px;
+    background: linear-gradient(135deg, #3a3b3e, #1a1b1e, #0d0e10);
+    padding: 6px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), inset 0 0 2px rgba(255, 255, 255, 0.6);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Inner Screen Surface */
+.phone-frame .screen {
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+    background-color: #ffffff;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================================================
+   Media Queries for All Screen Sizes
+   ========================================================================== */
+
+/* 1. หน้าจอมือถือขนาดเล็กมาก (ความกว้างไม่เกิน 380px) ให้แสดงผลเต็มจอพอดี */
+@media screen and (max-width: 380px) {
+    body {
+        align-items: flex-start;
+        padding: 0;
+    }
+    .phone-frame {
+        width: 100vw;
+        height: 100dvh;
+        border-radius: 0;
+        padding: 0;
+        box-shadow: none;
+        transform: none !important;
+    }
+    .phone-frame .screen {
+        border-radius: 0;
+    }
+}
+
+/* 2. หน้าจอมือถือทั่วไปและแท็บเล็ตขนาดเล็ก (381px - 768px) */
+@media screen and (min-width: 381px) and (max-width: 768px) {
+    .phone-frame {
+        transform: scale(min(calc((100vw - 20px) / 375), calc((100dvh - 20px) / 812)));
+        transform-origin: center center;
+    }
+}
+
+/* 3. หน้าจอแท็บเล็ตขนาดใหญ่และคอมพิวเตอร์ Desktop (ตั้งแต่ 769px ขึ้นไป) */
+@media screen and (min-width: 769px) {
+    .phone-frame {
+        transform: scale(min(1, calc((100dvh - 40px) / 812)));
+        transform-origin: center center;
+    }
+}
+
+/* 4. กรณีใช้งานในโหมดแนวนอน (Landscape Mode) บนมือถือหรือแท็บเล็ต */
+@media screen and (max-height: 600px) and (orientation: landscape) {
+    body {
+        padding: 10px 0;
+        align-items: center;
+    }
+    .phone-frame {
+        transform: scale(calc((100dvh - 20px) / 812));
+        transform-origin: center center;
+    }
+}
+
+/* ==========================================================================
+   Utility Classes
+   ========================================================================== */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
