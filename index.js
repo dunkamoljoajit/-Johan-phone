@@ -149,7 +149,7 @@ function updateStaticUIText() {
     if (document.getElementById('msg-contact-name')) document.getElementById('msg-contact-name').innerText = txt.msgContactName;
     if (document.getElementById('msg-contact-status')) document.getElementById('msg-contact-status').innerText = txt.msgContactStatus;
     
-    // +++ เพิ่มส่วนประวัติแชทเก่า +++
+    // ประวัติแชทเก่า
     if (document.getElementById('msg-date-1')) document.getElementById('msg-date-1').innerText = txt.msgDate1;
     if (document.getElementById('msg-old-1')) document.getElementById('msg-old-1').innerText = txt.msgOld1;
     if (document.getElementById('msg-old-2')) document.getElementById('msg-old-2').innerText = txt.msgOld2;
@@ -159,31 +159,28 @@ function updateStaticUIText() {
     if (document.getElementById('msg-date-2')) document.getElementById('msg-date-2').innerText = txt.msgDate2;
     if (document.getElementById('msg-old-5')) document.getElementById('msg-old-5').innerText = txt.msgOld5;
     if (document.getElementById('msg-old-6')) document.getElementById('msg-old-6').innerText = txt.msgOld6;
-    // +++++++++++++++++++++++++++++
 
     if (document.getElementById('msg-date-header')) document.getElementById('msg-date-header').innerText = txt.msgDateHeader;
     if (document.getElementById('msg-outgoing')) document.getElementById('msg-outgoing').innerText = txt.msgOutgoing;
     if (document.getElementById('msg-incoming')) document.getElementById('msg-incoming').innerText = txt.msgIncoming;
 
-    // X App
+    // Instagram App
     if (document.getElementById('x-user-name')) document.getElementById('x-user-name').innerText = txt.xUserName;
     if (document.getElementById('x-post-content')) document.getElementById('x-post-content').innerHTML = txt.xPostContent;
 }
 
-// ฟังก์ชันแปลงรูปแบบวันที่และเดือนให้เป็นภาษาที่เลือก (เช่น '23 ต.ค.' -> '23 Oct' / '10월 23일' / '10月23日')
+// ฟังก์ชันแปลงรูปแบบวันที่และเดือนให้เป็นภาษาที่เลือก
 function translateDateString(dateStr) {
     if (!dateStr) return '';
 
     const txt = i18n[currentLang];
     
-    // 1. แปลงคำว่า "วันนี้" / "เมื่อวานนี้"
     let formatted = dateStr;
     if (formatted.includes('วันนี้')) {
         formatted = formatted.replace('วันนี้', txt.today);
     } else if (formatted.includes('เมื่อวานนี้')) {
         formatted = formatted.replace('เมื่อวานนี้', txt.yesterday);
     } else {
-        // 2. แปลงเดือนภาษาไทยเป็นเดือนของภาษาต่าง ๆ
         const dayMatch = formatted.match(/(\d+)\s*ต\.ค\./);
         if (dayMatch) {
             const day = dayMatch[1];
@@ -193,7 +190,6 @@ function translateDateString(dateStr) {
         }
     }
 
-    // 3. ตัดคำว่า "น." ในภาษาต่างประเทศ
     if (currentLang !== 'th') {
         formatted = formatted.replace('น.', '').trim();
     }
@@ -355,7 +351,6 @@ function renderAlbumsGrid() {
 }
 
 function openAlbumDetail(albumKey) {
-    // อัปเดตอัลบั้มรายการโปรดให้เป็นข้อมูลล่าสุดก่อนเรนเดอร์เสมอ
     if (albumKey === 'favorites') {
         updateFavoritesAlbum();
     }
@@ -376,7 +371,6 @@ function openAlbumDetail(albumKey) {
 
     validPhotos.forEach((item, index) => {
         const card = document.createElement('div');
-        // ใส่ w-full กำกับคู่กับ aspect-square เพื่อป้องกันปัญหาแถวบีบซ้อนทับกัน
         card.className = "w-full aspect-square bg-gray-100 rounded-xl overflow-hidden shadow-sm active:scale-95 transition-transform cursor-pointer";
         card.onclick = () => openPhotoViewer(validPhotos, index);
         card.innerHTML = `<img src="${item.url}" class="w-full h-full object-cover">`;
@@ -486,13 +480,11 @@ function toggleViewerFavorite() {
 }
 
 function openApp(appId, theme) {
-    // 1. ซ่อนแอปทั้งหมดก่อน
     document.querySelectorAll('.app-view').forEach(app => {
         app.classList.remove('active');
         app.classList.add('hidden');
     });
 
-    // 2. แสดงเฉพาะแอปที่ถูกกดเปิด
     const targetApp = document.getElementById(appId);
     if (targetApp) {
         targetApp.classList.remove('hidden');
@@ -507,7 +499,7 @@ function openApp(appId, theme) {
 function closeApp() {
     document.querySelectorAll('.app-view').forEach(app => {
         app.classList.remove('active');
-        app.classList.add('hidden'); // ซ่อนแอปทั้งหมด
+        app.classList.add('hidden');
     });
     currentApp = null;
     closeAlbumDetail();
@@ -539,8 +531,9 @@ function goHome() {
     hideRecents();
     closePhotoViewer();
     closeAlbumDetail();
-    closeApp(); // ปิดแอปเพื่อเผยหน้า Home Screen ด้านหลัง
+    closeApp();
 }
+
 function goBack() {
     const recentsOverlay = document.getElementById('recents-overlay');
     const photoViewer = document.getElementById('photo-viewer');
@@ -570,10 +563,15 @@ function showRecents() {
 
     const txt = i18n[currentLang];
     recentsList.innerHTML = '';
+    
+    // อัปเดตรายชื่อแอปทั้งหมดให้ตรงกับไอคอนใน HTML
     const appTitles = {
         'app-gallery': { name: txt.appNameGallery, icon: 'fas fa-image' },
         'app-messages': { name: txt.appNameMessages, icon: 'fas fa-comment-alt' },
-        'app-x': { name: 'X', icon: 'fab fa-twitter' }
+        'app-ig': { name: txt.appNameIg, icon: 'fab fa-instagram' },
+        'app-line': { name: txt.appNameLine, icon: 'fab fa-line' },
+        'app-kbank': { name: txt.appNameKbank, icon: 'fas fa-university' },
+        'app-stocks': { name: txt.appNameStocks, icon: 'fas fa-chart-line' }
     };
 
     if (openAppStack.length === 0) {
@@ -585,7 +583,7 @@ function showRecents() {
             card.className = 'bg-gray-800/90 border border-gray-700 rounded-2xl p-3 flex flex-col justify-between h-36 cursor-pointer hover:border-gray-500 transition';
             card.onclick = () => {
                 hideRecents();
-                openApp(appId, appId === 'app-x' ? 'dark' : 'light');
+                openApp(appId, 'light');
             };
             card.innerHTML = `
                 <div class="flex items-center justify-between text-xs text-gray-200">
@@ -642,6 +640,27 @@ document.addEventListener('DOMContentLoaded', () => {
     renderAlbumsGrid();
     setupPhotoViewerSwipe();
     
-    // เด้งป๊อปอัพเลือกภาษาทันทีเมื่อเปิดใช้งาน
+    // เปิด Modal เลือกภาษาเมื่อเริ่มต้น
     openLanguageModal();
+});
+// ============================================
+// เช็ค Hash จาก URL เพื่อเปิดแอพอัตโนมัติ (เช่น กลับจากหน้าแชทย่อย)
+// ============================================
+window.addEventListener('load', () => {
+    if (window.location.hash) {
+        const targetAppId = window.location.hash.substring(1); // ตัดเครื่องหมาย # ออก
+        
+        // ถ้าเป็น #app-line ให้ปิดหน้าต่างเลือกภาษาและเปิดแอป LINE ทันที
+        if (targetAppId === 'app-line') {
+            // ปิด Modal เลือกภาษา
+            const modal = document.getElementById('lang-select-modal');
+            if (modal) modal.classList.add('hidden');
+            
+            // เปิดแอป LINE
+            openApp('app-line', 'light');
+            
+            // ลบ Hash ออกจาก URL เพื่อให้ URL ดูสะอาด
+            history.replaceState(null, null, window.location.pathname);
+        }
+    }
 });
