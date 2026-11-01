@@ -103,7 +103,7 @@
                     <div class="w-[52px] h-[52px] bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 squircle flex items-center justify-center ui-shadow group-active:scale-90 transition-transform">
                         <i class="fab fa-instagram text-white text-3xl"></i>
                     </div>
-                    <span class="text-white text-[10px] font-medium">Instagram</span>
+                    <span id="app-label-ig" class="text-white text-[10px] font-medium">Instagram</span>
                 </div>
 
                 <!-- LINE -->
@@ -111,7 +111,7 @@
                     <div class="w-[52px] h-[52px] bg-[#06C755] squircle flex items-center justify-center ui-shadow group-active:scale-90 transition-transform">
                         <i class="fab fa-line text-white text-3xl"></i>
                     </div>
-                    <span class="text-white text-[10px] font-medium">LINE</span>
+                    <span id="app-label-line" class="text-white text-[10px] font-medium">LINE</span>
                 </div>
 
                 <!-- K PLUS -->
@@ -119,7 +119,7 @@
                     <div class="w-[52px] h-[52px] bg-[#138f48] squircle flex items-center justify-center ui-shadow group-active:scale-90 transition-transform">
                         <span class="text-white font-bold text-[18px] tracking-tight">K+</span>
                     </div>
-                    <span class="text-white text-[10px] font-medium">K PLUS</span>
+                    <span id="app-label-kbank" class="text-white text-[10px] font-medium">K PLUS</span>
                 </div>
 
                 <!-- Stock Trading -->
@@ -127,7 +127,7 @@
                     <div class="w-[52px] h-[52px] bg-gradient-to-br from-[#142d4e] to-[#2876bd] squircle flex items-center justify-center ui-shadow group-active:scale-90 transition-transform">
                         <i class="fas fa-chart-line text-white text-2xl"></i>
                     </div>
-                    <span class="text-white text-[10px] font-medium">หุ้น</span>
+                    <span id="app-label-stocks" class="text-white text-[10px] font-medium">หุ้น</span>
                 </div>
 
                 <!-- Galaxy Store -->
@@ -135,7 +135,7 @@
                     <div class="w-[52px] h-[52px] bg-pink-500 squircle flex items-center justify-center ui-shadow group-active:scale-90 transition-transform">
                         <i class="fas fa-shopping-bag text-white text-xl"></i>
                     </div>
-                    <span class="text-white text-[10px] font-medium">Store</span>
+                    <span id="app-label-store" class="text-white text-[10px] font-medium">Store</span>
                 </div>
             </div>
         </div>
@@ -275,22 +275,18 @@
                 </div>
             </div>
 
-            <!-- 2. พื้นที่แชท (Chat History) - ใส่ข้อความจำลองให้เต็มหน้า -->
+            <!-- 2. พื้นที่แชท (Chat History) -->
             <div class="flex-1 p-4 flex flex-col gap-3 overflow-y-auto no-scrollbar pb-4">
-                
-                <!-- แชทเก่าวันที่ 1 -->
                 <div id="msg-date-1" class="text-center text-[10px] text-gray-400 mt-1">เมื่อวาน 08:30 น.</div>
                 <div id="msg-old-1" class="self-end bg-blue-500 text-white rounded-2xl rounded-tr-sm px-4 py-2 text-[13px] max-w-[80%] shadow-sm">มอนิ่งครับ วันนี้มีเรียนเช้าไหม?</div>
                 <div id="msg-old-2" class="self-start bg-white border border-gray-200 text-gray-800 rounded-2xl rounded-tl-sm px-4 py-2 text-[13px] max-w-[80%] shadow-sm">มีครับ 10 โมง</div>
                 <div id="msg-old-3" class="self-end bg-blue-500 text-white rounded-2xl rounded-tr-sm px-4 py-2 text-[13px] max-w-[80%] shadow-sm">ตั้งใจเรียนนะ เลิกแล้วทักมา</div>
                 <div id="msg-old-4" class="self-start bg-white border border-gray-200 text-gray-800 rounded-2xl rounded-tl-sm px-4 py-2 text-[13px] max-w-[80%] shadow-sm">ค้าบบบ พี่ก็สู้ๆ นะ ✌️</div>
                 
-                <!-- แชทเก่าวันที่ 2 -->
                 <div id="msg-date-2" class="text-center text-[10px] text-gray-400 mt-2">วันนี้ 12:15 น.</div>
                 <div id="msg-old-5" class="self-end bg-blue-500 text-white rounded-2xl rounded-tr-sm px-4 py-2 text-[13px] max-w-[80%] shadow-sm">พักเที่ยงแล้ว กินอะไรหรือยัง?</div>
                 <div id="msg-old-6" class="self-start bg-white border border-gray-200 text-gray-800 rounded-2xl rounded-tl-sm px-4 py-2 text-[13px] max-w-[80%] shadow-sm">กินก๋วยเตี๋ยวหน้ามอครับ อร่อยมากก 🍜</div>
 
-                <!-- ข้อความล่าสุด -->
                 <div id="msg-date-header" class="text-center text-[10px] text-gray-400 mt-2">วันนี้ 16:30 น.</div>
                 <div id="msg-outgoing" class="self-end bg-blue-500 text-white rounded-2xl rounded-tr-sm px-4 py-2 text-[13px] max-w-[80%] shadow-sm">เลิกเรียนเดี๋ยวพี่ไปรับน่ะ</div>
                 <div id="msg-incoming" class="self-start bg-white border border-gray-200 text-gray-800 rounded-2xl rounded-tl-sm px-4 py-2 text-[13px] max-w-[80%] shadow-sm">ครับ รับทราบ</div>
@@ -315,7 +311,7 @@
             
             <!-- IG Header -->
             <div class="flex justify-between items-center px-4 py-2 border-b border-gray-100 shrink-0 z-10 bg-white">
-                <div class="font-bold text-xl font-serif text-gray-900">Instagram</div>
+                <div id="ig-app-title" class="font-bold text-xl font-serif text-gray-900">Instagram</div>
                 <div class="flex gap-4 text-black text-xl">
                     <i class="far fa-heart cursor-pointer"></i>
                     <i class="fab fa-facebook-messenger cursor-pointer"></i>
@@ -329,36 +325,27 @@
                     <!-- Post Header -->
                     <div class="flex items-center justify-between px-3 py-2">
                         <div class="flex items-center gap-2">
-                            <!-- กรอบสีรุ้งรอบรูปโปรไฟล์ (Story) -->
                             <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 p-[2px]">
                                 <div class="w-full h-full bg-white rounded-full border-2 border-white overflow-hidden">
                                     <img src="https://i.pinimg.com/736x/27/35/ba/2735ba49684f45d2b9feda306b3f9f7e.jpg" class="w-full h-full object-cover">
                                 </div>
                             </div>
-                            <!-- ชื่อ User (ดึงจาก JS ที่ตั้งไว้) -->
                             <span id="x-user-name" class="font-bold text-[13px] text-gray-900">North</span>
                         </div>
                         <i class="fas fa-ellipsis-h text-gray-500"></i>
                     </div>
                     
-                    <!-- Post Image (เลื่อนได้ 4 รูป) -->
+                    <!-- Post Image -->
                     <div class="relative w-full h-[350px] bg-gray-100 flex overflow-x-auto snap-x snap-mandatory no-scrollbar">
-                        <!-- รูปที่ 1 -->
                         <div class="min-w-full h-full snap-center flex-shrink-0">
                             <img src="https://i.pinimg.com/1200x/8d/bb/b8/8dbbb882929048c327e853120a4b5487.jpg" class="w-full h-full object-cover">
                         </div>
-                        
-                        <!-- รูปที่ 2 -->
                         <div class="min-w-full h-full snap-center flex-shrink-0">
                             <img src="https://i.pinimg.com/1200x/1c/33/5f/1c335fcda9853822514cefbae30c64d4.jpg" class="w-full h-full object-cover">
                         </div>
-                        
-                        <!-- รูปที่ 3 -->
                         <div class="min-w-full h-full snap-center flex-shrink-0">
                             <img src="https://i.pinimg.com/736x/84/e1/21/84e1216d715e637d31dfbffb56332801.jpg" class="w-full h-full object-cover">
                         </div>
-                        
-                        <!-- รูปที่ 4 -->
                         <div class="min-w-full h-full snap-center flex-shrink-0">
                             <img src="https://i.pinimg.com/1200x/c2/07/d3/c207d32f187b792701c1584170ca2627.jpg" class="w-full h-full object-cover">
                         </div>
@@ -377,10 +364,9 @@
                     <!-- Post Caption -->
                     <div class="px-3 pb-2 text-sm text-gray-900 leading-relaxed">
                         <span class="font-bold mr-1">North</span>
-                        <!-- ข้อความ (ดึงจาก JS ที่ตั้งไว้) -->
                         <span id="x-post-content">แกกกก วันนี้เห็นคุณปัณณวิชญ์มารอรับน้องมัทธนาที่หน้าตึกอีกแล้วว สายตาที่มองคือหวานเจี๊ยบ! 💖</span>
                     </div>
-                    <div class="px-3 text-[11px] text-gray-400">ดูคำแปล</div>
+                    <div id="ig-view-translate" class="px-3 text-[11px] text-gray-400">ดูคำแปล</div>
                 </div>
             </div>
             
@@ -404,7 +390,7 @@
             <div class="px-4 py-3 bg-white flex items-center justify-between border-b border-gray-100 shrink-0 shadow-sm sticky top-0 z-20">
                 <div class="flex items-center gap-3">
                     <i class="fas fa-chevron-left text-gray-700 text-lg cursor-pointer p-1 hover:text-black transition-colors" onclick="closeApp()"></i>
-                    <div class="font-bold text-xl text-gray-900">แชท <span class="text-[#06C755]">LINE</span></div>
+                    <div id="line-title-text" class="font-bold text-xl text-gray-900">แชท <span class="text-[#06C755]">LINE</span></div>
                 </div>
                 <div class="flex gap-4 text-gray-700 text-base">
                     <i class="fas fa-search cursor-pointer hover:text-black transition-colors" onclick="showToast('ค้นหาแชท')"></i>
@@ -414,9 +400,9 @@
 
             <!-- Tab Bar -->
             <div class="px-4 py-2 bg-white flex gap-6 text-sm font-semibold border-b border-gray-100 shrink-0 sticky top-[60px] z-20">
-                <button type="button" onclick="showToast('แชท')" class="text-[#06C755] border-b-2 border-[#06C755] pb-2 transition-colors">แชท</button>
-                <button type="button" onclick="showToast('เพื่อน')" class="text-gray-400 hover:text-gray-600 pb-2 transition-colors">เพื่อน</button>
-                <button type="button" onclick="showToast('กลุ่ม')" class="text-gray-400 hover:text-gray-600 pb-2 transition-colors">กลุ่ม</button>
+                <button type="button" id="line-tab-chat" onclick="showToast('แชท')" class="text-[#06C755] border-b-2 border-[#06C755] pb-2 transition-colors">แชท</button>
+                <button type="button" id="line-tab-friend" onclick="showToast('เพื่อน')" class="text-gray-400 hover:text-gray-600 pb-2 transition-colors">เพื่อน</button>
+                <button type="button" id="line-tab-group" onclick="showToast('กลุ่ม')" class="text-gray-400 hover:text-gray-600 pb-2 transition-colors">กลุ่ม</button>
             </div>
 
             <!-- Chat List Content -->
@@ -429,7 +415,7 @@
                     </div>
                     <div class="flex-1 min-w-0">
                         <div class="font-semibold text-sm text-gray-900 truncate">North</div>
-                        <div class="text-xs text-gray-500 mt-0.5 truncate">มันตัวน่ารำคาญนะครับ พี่เลยบล็อกไปให้จบ ๆ เจอกันที่ห้องน่ะ</div>
+                        <div id="line-chat1-msg" class="text-xs text-gray-500 mt-0.5 truncate">มันตัวน่ารำคาญนะครับ พี่เลยบล็อกไปให้จบ ๆ เจอกันที่ห้องน่ะ</div>
                     </div>
                     <div class="text-[10px] text-gray-400 shrink-0 self-start mt-1">20:15</div>
                 </a>
@@ -441,7 +427,7 @@
                     </div>
                     <div class="flex-1 min-w-0">
                         <div class="font-semibold text-sm text-gray-900 truncate">Arthit</div>
-                        <div class="text-xs text-gray-500 mt-0.5 truncate">You block Arthit</div>
+                        <div id="line-chat2-msg" class="text-xs text-gray-500 mt-0.5 truncate">You block Arthit</div>
                     </div>
                     <div class="text-[10px] text-gray-400 shrink-0 self-start mt-1">19:42</div>
                 </a>
@@ -453,7 +439,7 @@
                     </div>
                     <div class="flex-1 min-w-0">
                         <div class="font-semibold text-sm text-gray-900 truncate">4 หมอ</div>
-                        <div class="text-xs text-gray-500 mt-0.5 truncate">มีข้อความใหม่</div>
+                        <div id="line-chat3-msg" class="text-xs text-gray-500 mt-0.5 truncate">มีข้อความใหม่</div>
                     </div>
                     <div class="text-[10px] text-gray-400 shrink-0 self-start mt-1">18:30</div>
                 </a>
@@ -490,27 +476,27 @@
                         <i class="fas fa-bell cursor-pointer"></i>
                     </div>
                 </div>
-                <div class="text-xs opacity-80 mt-4">บัญชีของฉัน </div>
+                <div id="kbank-acc-label" class="text-xs opacity-80 mt-4">บัญชีของฉัน </div>
                 <div id="kbank-balance" class="text-3xl font-semibold mt-1">฿ 666,666,666.66</div>
-                <div class="text-xs opacity-80 mt-1">ยอดเงินคงเหลือ</div>
+                <div id="kbank-bal-label" class="text-xs opacity-80 mt-1">ยอดเงินคงเหลือ</div>
 
                 <!-- Quick Action Menu -->
                 <div class="grid grid-cols-4 gap-2 mt-5 text-center text-xs">
                     <div class="cursor-pointer group" onclick="openTransferModal('North')">
                         <div class="w-11 h-11 rounded-2xl bg-white/20 mx-auto flex items-center justify-center text-xl group-active:scale-95 transition-transform"><i class="fas fa-paper-plane"></i></div>
-                        <div class="mt-2 font-medium">โอนเงิน</div>
+                        <div id="kbank-btn-transfer" class="mt-2 font-medium">โอนเงิน</div>
                     </div>
                     <div class="cursor-pointer group" onclick="openTransferModal('ซื้อสินค้า / QR Code')">
                         <div class="w-11 h-11 rounded-2xl bg-white/20 mx-auto flex items-center justify-center text-xl group-active:scale-95 transition-transform"><i class="fas fa-qrcode"></i></div>
-                        <div class="mt-2 font-medium">สแกนจ่าย</div>
+                        <div id="kbank-btn-scan" class="mt-2 font-medium">สแกนจ่าย</div>
                     </div>
                     <div class="cursor-pointer group" onclick="showToast('เติมเงิน')">
                         <div class="w-11 h-11 rounded-2xl bg-white/20 mx-auto flex items-center justify-center text-xl group-active:scale-95 transition-transform"><i class="fas fa-mobile-alt"></i></div>
-                        <div class="mt-2 font-medium">เติมเงิน</div>
+                        <div id="kbank-btn-topup" class="mt-2 font-medium">เติมเงิน</div>
                     </div>
                     <div class="cursor-pointer group" onclick="showToast('เมนูทั้งหมด')">
                         <div class="w-11 h-11 rounded-2xl bg-white/20 mx-auto flex items-center justify-center text-xl group-active:scale-95 transition-transform"><i class="fas fa-ellipsis-h"></i></div>
-                        <div class="mt-2 font-medium">ทั้งหมด</div>
+                        <div id="kbank-btn-all" class="mt-2 font-medium">ทั้งหมด</div>
                     </div>
                 </div>
             </div>
@@ -521,11 +507,11 @@
                 <!-- ⭐️ Favorite Contacts Section (รายการโปรด) -->
                 <div class="mb-4">
                     <div class="flex justify-between items-center mb-2.5">
-                        <span class="font-bold text-gray-800 text-sm">รายการโปรด</span>
-                        <span class="text-[11px] text-emerald-600 font-semibold cursor-pointer" onclick="showToast('จัดการรายการโปรด')">แก้ไข</span>
+                        <span id="kbank-fav-title" class="font-bold text-gray-800 text-sm">รายการโปรด</span>
+                        <span id="kbank-fav-edit" class="text-[11px] text-emerald-600 font-semibold cursor-pointer" onclick="showToast('จัดการรายการโปรด')">แก้ไข</span>
                     </div>
                     <div class="flex gap-3 overflow-x-auto no-scrollbar py-1">
-                        <!-- Favorite 1: North (นอร์ธ) -->
+                        <!-- Favorite 1: North -->
                         <div class="flex flex-col items-center gap-1 cursor-pointer shrink-0 group" onclick="openTransferModal('North')">
                             <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-400 p-0.5 shadow-sm group-active:scale-90 transition-transform relative">
                                 <img src="https://i.pinimg.com/736x/27/35/ba/2735ba49684f45d2b9feda306b3f9f7e.jpg" class="w-full h-full object-cover rounded-full border-2 border-white">
@@ -537,7 +523,7 @@
                             <span class="text-[9px] text-gray-400">กสิกรไทย</span>
                         </div>
 
-                        <!-- Favorite 2: ซื้อสินค้า / ร้านค้า -->
+                        <!-- Favorite 2 -->
                         <div class="flex flex-col items-center gap-1 cursor-pointer shrink-0 group" onclick="openTransferModal('ชำระค่าสินค้า')">
                             <div class="w-14 h-14 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 text-xl border-2 border-emerald-200 shadow-sm group-active:scale-90 transition-transform">
                                 <i class="fas fa-shopping-bag"></i>
@@ -557,18 +543,18 @@
                     </div>
                 </div>
 
-                <!-- Recent Transactions (รายการล่าสุด) -->
+                <!-- Recent Transactions -->
                 <div>
-                    <div class="font-bold text-gray-800 text-sm mb-2.5">รายการล่าสุด</div>
+                    <div id="kbank-recent-title" class="font-bold text-gray-800 text-sm mb-2.5">รายการล่าสุด</div>
                     <div id="kbank-tx-list" class="space-y-2">
     
-                    <!-- รายการที่ 1: โอนเงินให้ North -->
+                    <!-- รายการที่ 1 -->
                     <div class="bg-white rounded-2xl p-3.5 flex items-center gap-3 shadow-sm border border-gray-100">
                         <div class="w-10 h-10 rounded-full bg-red-50 text-red-500 flex items-center justify-center shrink-0">
                             <i class="fas fa-paper-plane"></i>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <div class="text-xs font-semibold text-gray-800 truncate">โอนเงินให้ North</div>
+                            <div id="kbank-tx1-text" class="text-xs font-semibold text-gray-800 truncate">โอนเงินให้ North</div>
                             <div class="text-[10px] text-gray-400">วันนี้ 14:30 น. · กสิกรไทย</div>
                         </div>
                         <div class="text-xs font-semibold text-red-500 shrink-0">
@@ -576,13 +562,13 @@
                         </div>
                     </div>
 
-                    <!-- รายการที่ 2: ชำระค่าสินค้า (ซื้อของ) -->
+                    <!-- รายการที่ 2 -->
                     <div class="bg-white rounded-2xl p-3.5 flex items-center gap-3 shadow-sm border border-gray-100">
                         <div class="w-10 h-10 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center shrink-0">
                             <i class="fas fa-shopping-bag"></i>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <div class="text-xs font-semibold text-gray-800 truncate">ชำระค่าสินค้า (ซื้อของ)</div>
+                            <div id="kbank-tx2-text" class="text-xs font-semibold text-gray-800 truncate">ชำระค่าสินค้า (ซื้อของ)</div>
                             <div class="text-[10px] text-gray-400">เมื่อวาน 18:20 น. · QR พร้อมเพย์</div>
                         </div>
                         <div class="text-xs font-semibold text-red-500 shrink-0">
@@ -590,13 +576,13 @@
                         </div>
                     </div>
 
-                    <!-- รายการที่ 3: ชำระค่าสินค้า (ค่าคอม) (แยกออกมาเป็นกล่องใหม่) -->
+                    <!-- รายการที่ 3 -->
                     <div class="bg-white rounded-2xl p-3.5 flex items-center gap-3 shadow-sm border border-gray-100">
                         <div class="w-10 h-10 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center shrink-0">
                             <i class="fas fa-shopping-bag"></i>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <div class="text-xs font-semibold text-gray-800 truncate">ชำระค่าสินค้า (ค่าคอม)</div>
+                            <div id="kbank-tx3-text" class="text-xs font-semibold text-gray-800 truncate">ชำระค่าสินค้า (ค่าคอม)</div>
                             <div class="text-[10px] text-gray-400">เมื่อวาน 18:20 น. · QR พร้อมเพย์</div>
                         </div>
                         <div class="text-xs font-semibold text-red-500 shrink-0">
@@ -607,15 +593,15 @@
                 </div>
                 </div>
             </div>
-            <!-- MODAL: TRANSFER MONEY (หน้าต่างทำรายการโอนเงิน) -->
+
+            <!-- MODAL: TRANSFER MONEY -->
             <div id="kbank-transfer-modal" class="hidden absolute inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-end justify-center">
                 <div class="bg-white rounded-t-[28px] p-5 w-full shadow-2xl">
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-sm font-bold text-gray-900">โอนเงิน / ชำระเงิน</h3>
+                        <h3 id="kbank-modal-title" class="text-sm font-bold text-gray-900">โอนเงิน / ชำระเงิน</h3>
                         <i class="fas fa-times text-gray-400 text-lg cursor-pointer p-1" onclick="closeTransferModal()"></i>
                     </div>
 
-                    <!-- Target Account Info -->
                     <div class="bg-emerald-50 rounded-2xl p-3.5 flex items-center gap-3 mb-4 border border-emerald-100">
                         <div class="w-11 h-11 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-lg shrink-0 overflow-hidden">
                             <img id="transfer-target-img" src="https://i.pinimg.com/736x/27/35/ba/2735ba49684f45d2b9feda306b3f9f7e.jpg" class="w-full h-full object-cover">
@@ -626,24 +612,21 @@
                         </div>
                     </div>
 
-                    <!-- Amount Input -->
                     <div class="mb-4">
-                        <label class="block text-[11px] font-medium text-gray-600 mb-1">จำนวนเงิน (บาท)</label>
+                        <label id="kbank-amount-label" class="block text-[11px] font-medium text-gray-600 mb-1">จำนวนเงิน (บาท)</label>
                         <div class="relative">
                             <input type="number" id="transfer-amount-input" placeholder="0.00" class="w-full bg-gray-100 border border-gray-200 rounded-xl py-2.5 px-4 text-lg font-bold text-gray-800 focus:outline-none focus:border-emerald-500">
                             <span class="absolute right-4 top-1/2 -translate-y-1/2 font-bold text-gray-400 text-sm">฿</span>
                         </div>
                     </div>
 
-                    <!-- Quick Amount Pills -->
                     <div class="flex gap-2 mb-5">
                         <button type="button" onclick="setTransferAmount(100)" class="flex-1 py-1.5 bg-gray-100 hover:bg-emerald-100 rounded-lg text-xs font-semibold text-gray-700 transition-colors">100</button>
                         <button type="button" onclick="setTransferAmount(500)" class="flex-1 py-1.5 bg-gray-100 hover:bg-emerald-100 rounded-lg text-xs font-semibold text-gray-700 transition-colors">500</button>
                         <button type="button" onclick="setTransferAmount(1000)" class="flex-1 py-1.5 bg-gray-100 hover:bg-emerald-100 rounded-lg text-xs font-semibold text-gray-700 transition-colors">1,000</button>
                     </div>
 
-                    <!-- Submit Button -->
-                    <button type="button" onclick="confirmTransferTransaction()" class="w-full py-3 bg-[#138f48] hover:bg-emerald-700 text-white rounded-2xl font-bold text-sm shadow-md active:scale-95 transition-all">
+                    <button type="button" id="kbank-confirm-btn" onclick="confirmTransferTransaction()" class="w-full py-3 bg-[#138f48] hover:bg-emerald-700 text-white rounded-2xl font-bold text-sm shadow-md active:scale-95 transition-all">
                         ยืนยันการโอนเงิน
                     </button>
                 </div>
@@ -652,7 +635,6 @@
         </div>
 
         <!-- ================= APP 6: STOCKS ================= -->
-        <!-- (mock trading portfolio - Full Screen Tech Version) -->
         <div id="app-stocks" class="app-view hidden absolute inset-0 bg-[#f4f6fa] z-30 flex flex-col h-full">
             
             <!-- Header Section -->
@@ -660,7 +642,7 @@
                 <div class="flex justify-between items-center mb-3">
                     <div class="flex items-center gap-3">
                         <i class="fas fa-chevron-left text-white text-lg cursor-pointer p-1" onclick="closeApp()"></i>
-                        <div class="font-bold text-lg">พอร์ตลงทุน</div>
+                        <div id="stocks-title" class="font-bold text-lg">พอร์ตลงทุน</div>
                     </div>
                     <i class="fas fa-search cursor-pointer text-base" onclick="showToast('ค้นหาหุ้น')"></i>
                 </div>
@@ -668,19 +650,19 @@
                 <div class="text-sm text-emerald-300 mt-1"><i class="fas fa-arrow-up"></i> + ฿ 4,520,480.00 (+3.75%)</div>
                 
                 <div class="mt-5 flex gap-2">
-                    <button type="button" onclick="showToast('หน้าซื้อขายจำลองเท่านั้น')" class="flex-1 bg-emerald-500 hover:bg-emerald-600 active:scale-95 transition-all rounded-xl py-2.5 text-sm font-semibold shadow-sm">ซื้อ</button>
-                    <button type="button" onclick="showToast('หน้าซื้อขายจำลองเท่านั้น')" class="flex-1 bg-white/10 hover:bg-white/20 active:scale-95 transition-all rounded-xl py-2.5 text-sm font-semibold shadow-sm">ขาย</button>
+                    <button type="button" id="stocks-btn-buy" onclick="showToast('หน้าซื้อขายจำลองเท่านั้น')" class="flex-1 bg-emerald-500 hover:bg-emerald-600 active:scale-95 transition-all rounded-xl py-2.5 text-sm font-semibold shadow-sm">ซื้อ</button>
+                    <button type="button" id="stocks-btn-sell" onclick="showToast('หน้าซื้อขายจำลองเท่านั้น')" class="flex-1 bg-white/10 hover:bg-white/20 active:scale-95 transition-all rounded-xl py-2.5 text-sm font-semibold shadow-sm">ขาย</button>
                 </div>
             </div>
 
             <!-- Content Section -->
             <div class="p-4 flex-1 overflow-y-auto no-scrollbar pb-16">
                 <div class="flex justify-between items-center mb-3">
-                    <div class="font-bold text-gray-800 text-sm">รายการที่ติดตาม</div>
-                    <div class="text-xs text-blue-600 font-semibold cursor-pointer" onclick="showToast('ตลาดหุ้นสหรัฐฯ')">ตลาดหุ้นสหรัฐฯ</div>
+                    <div id="stocks-watchlist" class="font-bold text-gray-800 text-sm">รายการที่ติดตาม</div>
+                    <div id="stocks-usmarket" class="text-xs text-blue-600 font-semibold cursor-pointer" onclick="showToast('ตลาดหุ้นสหรัฐฯ')">ตลาดหุ้นสหรัฐฯ</div>
                 </div>
                 
-                <!-- Stock 1: NVIDIA -->
+                <!-- Stock Items -->
                 <div class="bg-white rounded-2xl p-4 mb-2.5 shadow-sm border border-gray-100 flex items-center gap-3">
                     <div class="w-10 h-10 rounded-xl bg-green-100 text-green-700 font-bold flex items-center justify-center text-xs shrink-0">NVDA</div>
                     <div class="flex-1 min-w-0">
@@ -693,7 +675,6 @@
                     </div>
                 </div>
 
-                <!-- Stock 2: Apple -->
                 <div class="bg-white rounded-2xl p-4 mb-2.5 shadow-sm border border-gray-100 flex items-center gap-3">
                     <div class="w-10 h-10 rounded-xl bg-gray-100 text-gray-800 font-bold flex items-center justify-center text-xs shrink-0">AAPL</div>
                     <div class="flex-1 min-w-0">
@@ -706,7 +687,6 @@
                     </div>
                 </div>
 
-                <!-- Stock 3: Microsoft -->
                 <div class="bg-white rounded-2xl p-4 mb-2.5 shadow-sm border border-gray-100 flex items-center gap-3">
                     <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 font-bold flex items-center justify-center text-xs shrink-0">MSFT</div>
                     <div class="flex-1 min-w-0">
@@ -719,7 +699,6 @@
                     </div>
                 </div>
 
-                <!-- Stock 4: Tesla -->
                 <div class="bg-white rounded-2xl p-4 mb-2.5 shadow-sm border border-gray-100 flex items-center gap-3">
                     <div class="w-10 h-10 rounded-xl bg-red-100 text-red-600 font-bold flex items-center justify-center text-xs shrink-0">TSLA</div>
                     <div class="flex-1 min-w-0">
@@ -732,7 +711,6 @@
                     </div>
                 </div>
 
-                <!-- Stock 5: Amazon -->
                 <div class="bg-white rounded-2xl p-4 mb-2.5 shadow-sm border border-gray-100 flex items-center gap-3">
                     <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 font-bold flex items-center justify-center text-xs shrink-0">AMZN</div>
                     <div class="flex-1 min-w-0">
@@ -745,7 +723,6 @@
                     </div>
                 </div>
 
-                <!-- Stock 6: Alphabet (Google) -->
                 <div class="bg-white rounded-2xl p-4 mb-2.5 shadow-sm border border-gray-100 flex items-center gap-3">
                     <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 font-bold flex items-center justify-center text-xs shrink-0">GOOGL</div>
                     <div class="flex-1 min-w-0">
