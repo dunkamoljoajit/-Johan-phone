@@ -13,7 +13,6 @@
     <script>
         // ดึงค่าภาษาที่ผู้ใช้เลือกไว้จากหน้าหลัก
         const savedLang = localStorage.getItem('sim_lang') || 'th';
-        // สามารถนำตัวแปร savedLang ไปใช้ปรับเงื่อนไขแสดงข้อความภายในหน้าแชทต่อได้
     </script>
     <style>
         body {
@@ -122,10 +121,9 @@
         <!-- 1. แถบด้านบน (LINE Header) -->
         <div class="px-4 pt-11 pb-3 bg-white flex items-center justify-between z-10 shrink-0 border-b border-gray-100 shadow-sm relative">
             <div class="flex items-center gap-4">
-                <!-- ค้นหาส่วนนี้ในไฟล์แชทย่อย -->
-            <a href="index.html#app-line" class="text-gray-800 text-lg hover:opacity-80 transition-opacity">
-                <i class="fas fa-chevron-left"></i>
-            </a>
+                <a href="index.html#app-line" class="text-gray-800 text-lg hover:opacity-80 transition-opacity">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
                 <div class="font-semibold text-[15px] text-gray-900 flex items-center gap-1">
                     Arthit
                 </div>
@@ -151,7 +149,7 @@
                 <div class="flex flex-col">
                     <span class="text-[10px] text-gray-700/80 ml-1 mb-0.5">Arthit</span>
                     <div class="flex items-end gap-1.5">
-                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed" data-i18n="arthitMsg1">
                             โจทำไรอยู่
                         </div>
                         <span class="text-[9px] text-gray-600/80 pb-1 shrink-0">08:32</span>
@@ -163,7 +161,7 @@
                 <img src="https://i.pinimg.com/1200x/e8/bb/5f/e8bb5fd5551f083b6c570e8a57ab5666.jpg" class="w-9 h-9 rounded-full object-cover shrink-0 mt-0.5 shadow-sm">
                 <div class="flex flex-col">
                     <div class="flex items-end gap-1.5">
-                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed" data-i18n="arthitMsg2">
                             มึงอ่านแล้วตอบหน่อยสิโจ
                         </div>
                         <span class="text-[9px] text-gray-600/80 pb-1 shrink-0">08:32</span>
@@ -175,7 +173,7 @@
                 <img src="https://i.pinimg.com/1200x/e8/bb/5f/e8bb5fd5551f083b6c570e8a57ab5666.jpg" class="w-9 h-9 rounded-full object-cover shrink-0 mt-0.5 shadow-sm">
                 <div class="flex flex-col">
                     <div class="flex items-end gap-1.5">
-                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed" data-i18n="arthitMsg3">
                             มึงไม่ตอบกูเลยนะโจ
                         </div>
                         <span class="text-[9px] text-gray-600/80 pb-1 shrink-0">08:32</span>
@@ -188,7 +186,7 @@
                     <span class="text-[9px] text-gray-600/80">อ่านแล้ว</span>
                     <span class="text-[9px] text-gray-600/80">08:35</span>
                 </div>
-                <div class="bubble-right bg-[#a9e46a] text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                <div class="bubble-right bg-[#a9e46a] text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed" data-i18n="arthitMsg4">
                     น่ารำคาญ
                 </div>
             </div>
@@ -206,7 +204,7 @@
                     <span class="text-[9px] text-gray-600/80">อ่านแล้ว</span>
                     <span class="text-[9px] text-gray-600/80">10:35</span>
                 </div>
-                <div class="bubble-right bg-[#a9e46a] text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                <div class="bubble-right bg-[#a9e46a] text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed" data-i18n="arthitMsg5">
                     มึงไปกวนอะไรนอร์ธ
                 </div>
             </div>
@@ -216,7 +214,7 @@
                 <div class="flex flex-col">
                     <span class="text-[10px] text-gray-700/80 ml-1 mb-0.5">Arthit</span>
                     <div class="flex items-end gap-1.5">
-                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed" data-i18n="arthitMsg6">
                             ก็มึงไม่ตอบกูอะโจ
                         </div>
                         <span class="text-[9px] text-gray-600/80 pb-1 shrink-0">10:36</span>
@@ -228,7 +226,7 @@
                 <img src="https://i.pinimg.com/1200x/e8/bb/5f/e8bb5fd5551f083b6c570e8a57ab5666.jpg" class="w-9 h-9 rounded-full object-cover shrink-0 mt-0.5 shadow-sm">
                 <div class="flex flex-col">
                     <div class="flex items-end gap-1.5">
-                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed" data-i18n="arthitMsg7">
                             แถมบล็อกูอีก
                         </div>
                         <span class="text-[9px] text-gray-600/80 pb-1 shrink-0">10:37</span>
@@ -240,7 +238,7 @@
                 <img src="https://i.pinimg.com/1200x/e8/bb/5f/e8bb5fd5551f083b6c570e8a57ab5666.jpg" class="w-9 h-9 rounded-full object-cover shrink-0 mt-0.5 shadow-sm">
                 <div class="flex flex-col">
                     <div class="flex items-end gap-1.5">
-                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed" data-i18n="arthitMsg8">
                             โจตังกูไม่พอว่ะ โอนให้หน่อย
                         </div>
                         <span class="text-[9px] text-gray-600/80 pb-1 shrink-0">10:37</span>
@@ -253,7 +251,7 @@
                     <span class="text-[9px] text-gray-600/80">อ่านแล้ว</span>
                     <span class="text-[9px] text-gray-600/80">10:38</span>
                 </div>
-                <div class="bubble-right bg-[#a9e46a] text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                <div class="bubble-right bg-[#a9e46a] text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed" data-i18n="arthitMsg9">
                     เออไอสัส
                 </div>
             </div>
@@ -263,7 +261,7 @@
                     <span class="text-[9px] text-gray-600/80">อ่านแล้ว</span>
                     <span class="text-[9px] text-gray-600/80">10:39</span>
                 </div>
-                <div class="bubble-right bg-[#a9e46a] text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                <div class="bubble-right bg-[#a9e46a] text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed" data-i18n="arthitMsg10">
                     มีอะไรก้ว่ามา
                 </div>
             </div>
@@ -273,7 +271,7 @@
                     <span class="text-[9px] text-gray-600/80">อ่านแล้ว</span>
                     <span class="text-[9px] text-gray-600/80">10:39</span>
                 </div>
-                <div class="bubble-right bg-[#a9e46a] text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                <div class="bubble-right bg-[#a9e46a] text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed" data-i18n="arthitMsg11">
                     เดี๋ยวกูต้องไปทานข้าวเที่ยงกับนอร์ธแล้ว
                 </div>
             </div>
@@ -283,7 +281,7 @@
                     <span class="text-[9px] text-gray-600/80">อ่านแล้ว</span>
                     <span class="text-[9px] text-gray-600/80">10:40</span>
                 </div>
-                <div class="bubble-right bg-[#a9e46a] text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                <div class="bubble-right bg-[#a9e46a] text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed" data-i18n="arthitMsg12">
                     นี่มึงจนขนาดขอตังค์กูเลยเหรอทิตย์
                 </div>
             </div>
@@ -291,7 +289,7 @@
                 <img src="https://i.pinimg.com/1200x/e8/bb/5f/e8bb5fd5551f083b6c570e8a57ab5666.jpg" class="w-9 h-9 rounded-full object-cover shrink-0 mt-0.5 shadow-sm">
                 <div class="flex flex-col">
                     <div class="flex items-end gap-1.5">
-                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed" data-i18n="arthitMsg13">
                             โอนมาเหอะโจ เดี๋ยวมึงไปทานข้าวเที่ยงกับนอร์ธมันไม่ทันน่ะ และอย่าคิดบล็อกกู เพราะกูจะทักไปหาเมื่อมึงมันจะไม่จบสิ้นดแเอา
                         </div>
                         <span class="text-[9px] text-gray-600/80 pb-1 shrink-0">10:37</span>
@@ -303,7 +301,7 @@
                     <span class="text-[9px] text-gray-600/80">อ่านแล้ว</span>
                     <span class="text-[9px] text-gray-600/80">10:39</span>
                 </div>
-                <div class="bubble-right bg-[#a9e46a] text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                <div class="bubble-right bg-[#a9e46a] text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed" data-i18n="arthitMsg14">
                     ส่งสลิป
                 </div>
             </div>
@@ -312,7 +310,7 @@
                     <span class="text-[9px] text-gray-600/80">อ่านแล้ว</span>
                     <span class="text-[9px] text-gray-600/80">10:39</span>
                 </div>
-                <div class="bubble-right bg-[#a9e46a] text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                <div class="bubble-right bg-[#a9e46a] text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed" data-i18n="arthitMsg15">
                     พอใจมึงแล้วใช่ไหมทิตย์
                 </div>
             </div>
@@ -320,7 +318,7 @@
                 <img src="https://i.pinimg.com/1200x/e8/bb/5f/e8bb5fd5551f083b6c570e8a57ab5666.jpg" class="w-9 h-9 rounded-full object-cover shrink-0 mt-0.5 shadow-sm">
                 <div class="flex flex-col">
                     <div class="flex items-end gap-1.5">
-                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed" data-i18n="arthitMsg16">
                             เออ ก็แค่นี้
                         </div>
                         <span class="text-[9px] text-gray-600/80 pb-1 shrink-0">10:37</span>
@@ -330,7 +328,7 @@
             <div class="text-center my-1 mt-3">
                 <span class="bg-black/20 text-white text-[10px] px-3 py-1 rounded-full">You Blocked Arthit</span>
             </div>
-        </div> <!-- ปิดกล่องแชท .flex-1 ที่ถูกต้อง -->
+        </div>
 
         <!-- 3. แถบพิมพ์ข้อความด้านล่าง (LINE Input Bar) -->
         <div class="bg-[#f5f5f5] px-3 py-3 flex items-center gap-3.5 shrink-0 pb-8 z-10 border-t border-gray-200">
@@ -349,5 +347,20 @@
     </div>
 </div>
 
+<!-- โหลด index.js เพื่อนำค่า savedLang และคลัง i18n มาแปลข้อความแชท -->
+<script src="index.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const lang = localStorage.getItem('sim_lang') || 'th';
+        if (typeof i18n !== 'undefined' && i18n[lang]) {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[lang][key]) {
+                    el.innerText = i18n[lang][key];
+                }
+            });
+        }
+    });
+</script>
 </body>
 </html>
