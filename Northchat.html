@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Line with North (S25 Ultra UI)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Prompt) -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: #0f0f11;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            user-select: none;
+            overflow: hidden;
+        }
+
+        /* เครื่อง S25 Ultra: ทรงเหลี่ยม Titanium Frame */
+        .phone-frame {
+            width: 375px;
+            height: 812px;
+            border-radius: 6px;
+            background: linear-gradient(135deg, #3a3b3e, #1a1b1e, #0d0e10);
+            padding: 4px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.8), inset 0 0 2px rgba(255,255,255,0.6);
+            position: relative;
+        }
+
+        /* Screen Surface */
+        .screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 2px;
+            background-color: #ffffff;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Camera Punch-hole */
+        .punch-hole {
+            width: 11px;
+            height: 11px;
+            background: #000;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 60;
+            box-shadow: inset 0 0 2px rgba(255,255,255,0.2);
+        }
+
+        /* Hide scrollbar */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* CSS สร้างติ่งบับเบิ้ลให้เหมือน LINE */
+        .bubble-left {
+            position: relative;
+            border-radius: 18px;
+        }
+        .bubble-left::before {
+            content: "";
+            position: absolute;
+            top: 12px;
+            left: -6px;
+            border-style: solid;
+            border-width: 5px 8px 5px 0;
+            border-color: transparent #ffffff transparent transparent;
+        }
+        .bubble-right {
+            position: relative;
+            border-radius: 18px;
+        }
+        .bubble-right::after {
+            content: "";
+            position: absolute;
+            top: 12px;
+            right: -6px;
+            border-style: solid;
+            border-width: 5px 0 5px 8px;
+            border-color: transparent transparent transparent #a9e46a;
+        }
+
+        /* ส่วนตั้งค่า Responsive สำหรับหน้าจอมือถือ */
+        @media (max-width: 480px) {
+            body {
+                min-height: 100dvh;
+            }
+            .phone-frame {
+                transform: scale(min(calc((100vw - 24px) / 375), calc((100dvh - 24px) / 812)));
+                transform-origin: center center;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="phone-frame">
+    <!-- Camera Punch-hole -->
+    <div class="punch-hole"></div>
+
+    <!-- Screen Content Container -->
+    <div class="screen">
+        
+        <!-- 1. แถบด้านบน (LINE Header) -->
+        <div class="px-4 pt-11 pb-3 bg-white flex items-center justify-between z-10 shrink-0 border-b border-gray-100 shadow-sm relative">
+            <div class="flex items-center gap-4">
+                <a href="index.html#app-line" class="text-gray-800 text-lg hover:opacity-80 transition-opacity">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+                <div class="font-semibold text-[15px] text-gray-900 flex items-center gap-1">
+                    North 💖
+                </div>
+            </div>
+            <div class="flex gap-5 text-gray-800 text-lg pr-1">
+                <i class="fas fa-search cursor-pointer hover:opacity-80"></i>
+                <i class="fas fa-phone-alt cursor-pointer hover:opacity-80"></i>
+                <i class="fas fa-bars cursor-pointer hover:opacity-80"></i>
+            </div>
+        </div>
+
+        <!-- 2. พื้นที่แชท (LINE Chat History) -->
+        <div class="flex-1 p-4 flex flex-col gap-4 overflow-y-auto no-scrollbar bg-[#749cb8]">
+            
+            <!-- วันที่ -->
+            <div class="text-center my-1">
+                <span class="bg-black/20 text-white text-[10px] px-3 py-1 rounded-full">วันพฤหัสบดี</span>
+            </div>
+            
+            <!-- ข้อความฝั่งเรา (ขวา) -->
+            <div class="flex gap-1.5 self-end max-w-[85%]">
+                <div class="flex flex-col justify-end items-end pb-1 pr-0.5">
+                    <span class="text-[9px] text-gray-600/80">อ่านแล้ว</span>
+                    <span class="text-[9px] text-gray-600/80">08:30</span>
+                </div>
+                <div class="bubble-right bg-[#a9e46a] text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                    ตอนเย็นพี่ไปรับน่ะ
+                </div>
+            </div>
+            
+            <!-- ข้อความฝั่ง North (ซ้าย) แบบมีติ่ง -->
+            <div class="flex gap-2.5 self-start max-w-[85%]">
+                <img src="https://i.pinimg.com/736x/27/35/ba/2735ba49684f45d2b9feda306b3f9f7e.jpg" class="w-9 h-9 rounded-full object-cover shrink-0 mt-0.5 shadow-sm">
+                <div class="flex flex-col">
+                    <span class="text-[10px] text-gray-700/80 ml-1 mb-0.5">North 💖</span>
+                    <div class="flex items-end gap-1.5">
+                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                            มีประชุมไม่ใช่เหรอครับ เหมือนพี่ปรางจะบอกนอร์ธน่ะ
+                        </div>
+                        <span class="text-[9px] text-gray-600/80 pb-1 shrink-0">08:32</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ข้อความฝั่งเรา (ขวา) แบบมีติ่ง -->
+            <div class="flex gap-1.5 self-end max-w-[85%] mt-1">
+                <div class="flex flex-col justify-end items-end pb-1 pr-0.5">
+                    <span class="text-[9px] text-gray-600/80">อ่านแล้ว</span>
+                    <span class="text-[9px] text-gray-600/80">08:35</span>
+                </div>
+                <div class="bubble-right bg-[#a9e46a] text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                    พอดีเกิดเรื่องนิดหน่อยน่ะ ประชุมเลยเลื่อน ไม่อยากให้พี่ไปรับเหรอ
+                </div>
+            </div>
+            
+            <div class="flex gap-2.5 self-start max-w-[85%]">
+                <img src="https://i.pinimg.com/736x/27/35/ba/2735ba49684f45d2b9feda306b3f9f7e.jpg" class="w-9 h-9 rounded-full object-cover shrink-0 mt-0.5 shadow-sm">
+                <div class="flex flex-col">
+                    <span class="text-[10px] text-gray-700/80 ml-1 mb-0.5">North 💖</span>
+                    <div class="flex items-end gap-1.5">
+                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                            ไม่ใช่อย่างนั้นสักหน่อย นอร์สแค่สงสัย เจอกันตอนเย็นนะครับพี่โจ
+                        </div>
+                        <span class="text-[9px] text-gray-600/80 pb-1 shrink-0">08:36</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- วันที่ -->
+            <div class="text-center my-1 mt-3">
+                <span class="bg-black/20 text-white text-[10px] px-3 py-1 rounded-full">วันนี้</span>
+            </div>
+            
+            <div class="flex gap-1.5 self-end max-w-[85%]">
+                <div class="flex flex-col justify-end items-end pb-1 pr-0.5">
+                    <span class="text-[9px] text-gray-600/80">อ่านแล้ว</span>
+                    <span class="text-[9px] text-gray-600/80">12:15</span>
+                </div>
+                <div class="bubble-right bg-[#a9e46a] text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                    พักเที่ยงแล้วครับนอร์ธ ทานข้าวหรือยังเอ่ย? อย่าลืมทานให้ตรงเวลานะครับ 🍲
+                </div>
+            </div>
+            
+            <div class="flex gap-2.5 self-start max-w-[85%]">
+                <img src="https://i.pinimg.com/736x/27/35/ba/2735ba49684f45d2b9feda306b3f9f7e.jpg" class="w-9 h-9 rounded-full object-cover shrink-0 mt-0.5 shadow-sm">
+                <div class="flex flex-col">
+                    <span class="text-[10px] text-gray-700/80 ml-1 mb-0.5">North 💖</span>
+                    <div class="flex items-end gap-1.5">
+                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                            กำลังทานก๋วยเตี๋ยวหน้ามอครับกับพวกจิ๋ว อร่อยมากก แต่ถ้ามีพี่โจมานั่งทานด้วยคงอร่อยกว่านี้
+                        </div> <!-- เพิ่ม </div> ที่หายไปตรงนี้ -->
+                        <span class="text-[9px] text-gray-600/80 pb-1 shrink-0">12:20</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex gap-1.5 self-end max-w-[85%] mt-2">
+                <div class="flex flex-col justify-end items-end pb-1 pr-0.5">
+                    <span class="text-[9px] text-gray-600/80">อ่านแล้ว</span>
+                    <span class="text-[9px] text-gray-600/80">16:30</span>
+                </div>
+                <div class="bubble-right bg-[#a9e46a] text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                    เลิกเรียนหรือยังครับ? เดี๋ยวพี่ขับรถไปรับข้างหน้าตึกนะ อยากเจอหน้าจะแย่แล้ว
+                </div>
+            </div>
+            
+            <!-- แยกบล็อคข้อความที่ซ้อนกันผิดให้ถูกต้อง -->
+            <div class="flex gap-2.5 self-start max-w-[85%] mb-2">
+                <img src="https://i.pinimg.com/736x/27/35/ba/2735ba49684f45d2b9feda306b3f9f7e.jpg" class="w-9 h-9 rounded-full object-cover shrink-0 mt-0.5 shadow-sm">
+                <div class="flex flex-col">
+                    <span class="text-[10px] text-gray-700/80 ml-1 mb-0.5">North 💖</span>
+                    <div class="flex items-end gap-1.5">
+                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                            เลิกพอดีเลยครับ! นอร์ธรออยู่ตรงม้านั่งนะ รีบมาน้าา คิดถึงที่สุดเลยครับ
+                        </div>
+                        <span class="text-[9px] text-gray-600/80 pb-1 shrink-0">16:31</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex gap-1.5 self-end max-w-[85%] mb-2">
+                <div class="flex flex-col justify-end items-end pb-1 pr-0.5">
+                    <span class="text-[9px] text-gray-600/80">อ่านแล้ว</span>
+                    <span class="text-[9px] text-gray-600/80">16:31</span>
+                </div>
+                <div class="bubble-right bg-[#a9e46a] text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                    ครับพี่จะรีบไปนะครับ! คิดถึงเหมือนกัน
+                </div>
+            </div>
+
+            <div class="flex gap-2.5 self-start max-w-[85%] mb-2">
+                <img src="https://i.pinimg.com/736x/27/35/ba/2735ba49684f45d2b9feda306b3f9f7e.jpg" class="w-9 h-9 rounded-full object-cover shrink-0 mt-0.5 shadow-sm">
+                <div class="flex flex-col">
+                    <span class="text-[10px] text-gray-700/80 ml-1 mb-0.5">North 💖</span>
+                    <div class="flex items-end gap-1.5">
+                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                            อย่ารีบนะครับ ค่อยๆ ขับรถมานน้านอร์ธรอได้
+                        </div>
+                        <span class="text-[9px] text-gray-600/80 pb-1 shrink-0">16:32</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex gap-1.5 self-end max-w-[85%] mb-2">
+                <div class="flex flex-col justify-end items-end pb-1 pr-0.5">
+                    <span class="text-[9px] text-gray-600/80">อ่านแล้ว</span>
+                    <span class="text-[9px] text-gray-600/80">16:32</span>
+                </div>
+                <div class="bubble-right bg-[#a9e46a] text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                    ครับพี่จะค่อยๆ ขับนะครับ
+                </div>
+            </div>
+            <div class="flex gap-2.5 self-start max-w-[85%] mb-2">
+                <img src="https://i.pinimg.com/736x/27/35/ba/2735ba49684f45d2b9feda306b3f9f7e.jpg" class="w-9 h-9 rounded-full object-cover shrink-0 mt-0.5 shadow-sm">
+                <div class="flex flex-col">
+                    <span class="text-[10px] text-gray-700/80 ml-1 mb-0.5">North 💖</span>
+                    <div class="flex items-end gap-1.5">
+                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                            ครับนอร์ธรอได้
+                        </div>
+                        <span class="text-[9px] text-gray-600/80 pb-1 shrink-0">16:32</span>
+                    </div>
+                </div>
+            </div>
+            <!-- วันที่ -->
+            <div class="text-center my-1">
+                <span class="bg-black/20 text-white text-[10px] px-3 py-1 rounded-full">วันศุกร์</span>
+            </div>
+            
+            <!-- ข้อความฝั่งเรา (ขวา) -->
+            <div class="flex gap-1.5 self-end max-w-[85%]">
+                <div class="flex flex-col justify-end items-end pb-1 pr-0.5">
+                    <span class="text-[9px] text-gray-600/80">08:30</span>
+                </div>
+                <div class="bubble-right bg-[#a9e46a] text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                    พี่มีประชุมด่วนครับนอร์ธ  สัญญาว่าจะมาทานข้าวตอนเที่ยงด้วย
+                </div>
+            </div>
+            <!-- ข้อความที่ 1 -->
+            <div class="flex gap-2.5 self-start max-w-[85%] mb-2">
+                <img src="https://i.pinimg.com/736x/27/35/ba/2735ba49684f45d2b9feda306b3f9f7e.jpg" class="w-9 h-9 rounded-full object-cover shrink-0 mt-0.5 shadow-sm">
+                <div class="flex flex-col">
+                    <span class="text-[10px] text-gray-700/80 ml-1 mb-0.5">North 💖</span>
+                    <div class="flex items-end gap-1.5">
+                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                            ก็ว่าอยู่พี่โจหายไปไหนประชุมนี่เอง สัญญาแล้วนะครับว่าจะมาทานเข้าด้วยกัน
+                        </div>
+                        <span class="text-[9px] text-gray-600/80 pb-1 shrink-0">9:32</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ข้อความที่ 2 -->
+            <div class="flex gap-2.5 self-start max-w-[85%] mb-2">
+                <img src="https://i.pinimg.com/736x/27/35/ba/2735ba49684f45d2b9feda306b3f9f7e.jpg" class="w-9 h-9 rounded-full object-cover shrink-0 mt-0.5 shadow-sm">
+                <div class="flex flex-col">
+                    <span class="text-[10px] text-gray-700/80 ml-1 mb-0.5">North 💖</span>
+                    <div class="flex items-end gap-1.5">
+                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                            สัญญาแล้วนะครับว่าจะมาทานเข้าด้วยกัน
+                        </div>
+                        <span class="text-[9px] text-gray-600/80 pb-1 shrink-0">9:33</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex gap-2.5 self-start max-w-[85%] mb-2">
+                <img src="https://i.pinimg.com/736x/27/35/ba/2735ba49684f45d2b9feda306b3f9f7e.jpg" class="w-9 h-9 rounded-full object-cover shrink-0 mt-0.5 shadow-sm">
+                <div class="flex flex-col">
+                    <span class="text-[10px] text-gray-700/80 ml-1 mb-0.5">North 💖</span>
+                    <div class="flex items-end gap-1.5">
+                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                            น่าจะติดประชุมอยู่แน่เลย นอร์ธไปหาอะไรทานก่อนนะครับ 
+                        </div>
+                        <span class="text-[9px] text-gray-600/80 pb-1 shrink-0">9:34</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex gap-2.5 self-start max-w-[85%] mb-2">
+                <img src="https://i.pinimg.com/736x/27/35/ba/2735ba49684f45d2b9feda306b3f9f7e.jpg" class="w-9 h-9 rounded-full object-cover shrink-0 mt-0.5 shadow-sm">
+                <div class="flex flex-col">
+                    <span class="text-[10px] text-gray-700/80 ml-1 mb-0.5">North 💖</span>
+                    <div class="flex items-end gap-1.5">
+                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                            นอร์ธกินข้าวอยู่พี่ทิตย์กวนนอร์ธอีกแล้วบอกพี่โจบล็อกมัน พี่มันทำอะไรพี่โจอีกแล้วครับ เดี๋ยวนอร์ธจัดการให้ 
+                        </div>
+                        <span class="text-[9px] text-gray-600/80 pb-1 shrink-0">9:33</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex gap-1.5 self-end max-w-[85%]">
+                <div class="flex flex-col justify-end items-end pb-1 pr-0.5">
+                    <span class="text-[9px] text-gray-600/80">10:30</span>
+                </div>
+                <div class="bubble-right bg-[#a9e46a] text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                    เดี๋ยวพี่กลับไปบอกที่ห้องนะครับ ตอนทานข้าวเที่ยงด้วยกัน
+                </div>
+            </div>
+            <div class="flex gap-2.5 self-start max-w-[85%] mb-2">
+                <img src="https://i.pinimg.com/736x/27/35/ba/2735ba49684f45d2b9feda306b3f9f7e.jpg" class="w-9 h-9 rounded-full object-cover shrink-0 mt-0.5 shadow-sm">
+                <div class="flex flex-col">
+                    <span class="text-[10px] text-gray-700/80 ml-1 mb-0.5">North 💖</span>
+                    <div class="flex items-end gap-1.5">
+                        <div class="bubble-left bg-white text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                            ทำไมบอกนอร์ธเลยไม่ได้ล่ะครับพี่โจ
+                        </div>
+                        <span class="text-[9px] text-gray-600/80 pb-1 shrink-0">9:33</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex gap-1.5 self-end max-w-[85%]">
+                <div class="flex flex-col justify-end items-end pb-1 pr-0.5">
+                    <span class="text-[9px] text-gray-600/80">10:30</span>
+                </div>
+                <div class="bubble-right bg-[#a9e46a] text-gray-900 px-3.5 py-2 text-[13px] shadow-sm leading-relaxed">
+                    มันตัวน่ารำคาญนะครับ พี่เลยบล็อกไปให้จบ ๆ เจอกันที่ห้องน่ะ
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. แถบพิมพ์ข้อความด้านล่าง (LINE Input Bar) -->
+        <div class="bg-[#f5f5f5] px-3 py-3 flex items-center gap-3.5 shrink-0 pb-8 z-10 border-t border-gray-200">
+            <i class="fas fa-plus text-gray-500 text-[22px] cursor-pointer hover:text-gray-700 transition-colors"></i>
+            <i class="fas fa-camera text-gray-500 text-xl cursor-pointer hover:text-gray-700 transition-colors"></i>
+            <i class="far fa-image text-gray-500 text-[22px] cursor-pointer hover:text-gray-700 transition-colors"></i>
+            
+            <div class="flex-1 bg-white border border-gray-300 rounded-full h-[38px] flex items-center px-4 shadow-sm">
+                <span class="text-[13px] text-gray-400 font-sans">Aa</span>
+                <i class="far fa-smile text-gray-400 text-lg ml-auto cursor-pointer"></i>
+            </div>
+            
+            <i class="fas fa-microphone text-gray-500 text-xl cursor-pointer hover:text-gray-700 transition-colors"></i>
+        </div>
+        
+    </div>
+</div>
+
+</body>
+</html>
