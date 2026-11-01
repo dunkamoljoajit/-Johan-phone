@@ -1,8 +1,10 @@
+// ============================================
 // System & Navigation State
+// ============================================
 let openAppStack = [];
 let currentApp = null;
 let isViewerFav = false;
-let currentLang = 'th';
+let currentLang = localStorage.getItem('sim_lang') || 'th';
 
 // Photo Viewer State
 let currentViewerPhotos = [];
@@ -10,7 +12,9 @@ let currentViewerIndex = 0;
 let touchStartX = 0;
 let touchEndX = 0;
 
-// พจนานุกรมแปลภาษา 5 ภาษาแบบสมบูรณ์ (ครอบคลุมทุกแอป)
+// ============================================
+// พจนานุกรมแปลภาษา 5 ภาษาแบบสมบูรณ์ (ครอบคลุมทุกหน้าและข้อความแชท)
+// ============================================
 const i18n = {
     th: {
         galleryTitle: 'แกลเลอรี', tabPictures: 'รูปภาพ', tabAlbums: 'อัลบั้ม', itemsSuffix: 'รายการ', today: 'วันนี้', yesterday: 'เมื่อวานนี้', noPhotos: 'ยังไม่มีรูปภาพ', favAdded: 'เพิ่มในรายการโปรดแล้ว', favRemoved: 'ลบออกจากรายการโปรด', langSelectedMsg: 'เลือกภาษาไทยเรียบร้อย', appNameGallery: 'แกลเลอรี', appNameMessages: 'ข้อความ', appNameIg: 'Instagram', appNameLine: 'LINE', appNameKbank: 'K PLUS', appNameStore: 'Store', appNameStocks: 'หุ้น',
@@ -24,7 +28,28 @@ const i18n = {
         kbankAcc: 'บัญชีของฉัน', kbankBalanceLabel: 'ยอดเงินคงเหลือ', kbankTransfer: 'โอนเงิน', kbankScan: 'สแกนจ่าย', kbankTopup: 'เติมเงิน', kbankAll: 'ทั้งหมด', kbankFav: 'รายการโปรด', kbankEdit: 'แก้ไข', kbankRecent: 'รายการล่าสุด', kbankTx1: 'โอนเงินให้ North', kbankTx2: 'ชำระค่าสินค้า (ซื้อของ)', kbankTx3: 'ชำระค่าสินค้า (ค่าคอม)', kbankModalTitle: 'โอนเงิน / ชำระเงิน', kbankAmountLabel: 'จำนวนเงิน (บาท)', kbankConfirmBtn: 'ยืนยันการโอนเงิน',
         stocksTitle: 'พอร์ตลงทุน', stocksWatchlist: 'รายการที่ติดตาม', stocksUsMarket: 'ตลาดหุ้นสหรัฐฯ', stocksBuy: 'ซื้อ', stocksSell: 'ขาย',
         toastPhone: 'โทรศัพท์', toastInternet: 'อินเทอร์เน็ต', toastCamera: 'กล้อง', toastStore: 'สโตร์', toastNewAlbum: 'อัลบั้มใหม่', toastSearch: 'ค้นหา', toastMore: 'เพิ่มเติม', toastEditor: 'เครื่องมือแต่งภาพ AI', toastShare: 'แชร์ด่วน', toastDeleted: 'ลบแล้ว', toastSimOnly: 'หน้าซื้อขายจำลองเท่านั้น', toastChatSearch: 'ค้นหาแชท', toastAddFriend: 'เพิ่มเพื่อน / สร้างกลุ่ม',
-        viewerFav: 'โปรด', viewerEdit: 'แก้ไข', viewerShare: 'แชร์', viewerDelete: 'ลบ', albumTitles: { camera: 'กล้อง', favorites: 'รายการโปรด', screenshots: 'Pre wedding', downloads: 'ดาวน์โหลด' }
+        viewerFav: 'โปรด', viewerEdit: 'แก้ไข', viewerShare: 'แชร์', viewerDelete: 'ลบ', albumTitles: { camera: 'กล้อง', favorites: 'รายการโปรด', screenshots: 'Pre wedding', downloads: 'ดาวน์โหลด' },
+        
+        arthitMsg1: "โจทำไรอยู่", arthitMsg2: "มึงอ่านแล้วตอบหน่อยสิโจ", arthitMsg3: "มึงไม่ตอบกูเลยนะโจ", arthitMsg4: "น่ารำคาญ",
+        arthitMsg5: "มึงไปกวนอะไรนอร์ธ", arthitMsg6: "ก็มึงไม่ตอบกูอะโจ", arthitMsg7: "แถมบล็อกูอีก", arthitMsg8: "โจตังกูไม่พอว่ะ โอนให้หน่อย",
+        arthitMsg9: "เออไอสัส", arthitMsg10: "มีอะไรก้ว่ามา", arthitMsg11: "เดี๋ยวกูต้องไปทานข้าวเที่ยงกับนอร์ธแล้ว", arthitMsg12: "นี่มึงจนขนาดขอตังค์กูเลยเหรอทิตย์",
+        arthitMsg13: "โอนมาเหอะโจ เดี๋ยวกูไปทานข้าวเที่ยงกับนอร์ธมันไม่ทันน่ะ และอย่าคิดบล็อกกู เพราะกูจะทักไปหาเมื่อมึงมันจะไม่จบสิ้นดแเอา",
+        arthitMsg14: "ส่งสลิป", arthitMsg15: "พอใจมึงแล้วใช่ไหมทิตย์", arthitMsg16: "เออ ก็แค่นี้",
+
+        northMsg1: "ตอนเย็นพี่ไปรับน่ะ", northMsg2: "มีประชุมไม่ใช่เหรอครับ เหมือนพี่ปรางจะบอกนอร์ธน่ะ",
+        northMsg3: "พอดีเกิดเรื่องนิดหน่อยน่ะ ประชุมเลยเลื่อน ไม่อยากให้พี่ไปรับเหรอ", northMsg4: "ไม่ใช่อย่างนั้นสักหน่อย นอร์สแค่สงสัย เจอกันตอนเย็นนะครับพี่โจ",
+        northMsg5: "พักเที่ยงแล้วครับนอร์ธ ทานข้าวหรือยังเอ่ย? อย่าลืมทานให้ตรงเวลานะครับ 🍲",
+        northMsg6: "กำลังทานก๋วยเตี๋ยวหน้ามอครับกับพวกจิ๋ว อร่อยมากก แต่ถ้ามีพี่โจมานั่งทานด้วยคงอร่อยกว่านี้",
+        northMsg7: "เลิกเรียนหรือยังครับ? เดี๋ยวพี่ขับรถไปรับข้างหน้าตึกนะ อยากเจอหน้าจะแย่แล้ว",
+        northMsg8: "เลิกพอดีเลยครับ! นอร์ธรออยู่ตรงม้านั่งนะ รีบมาน้าา คิดถึงที่สุดเลยครับ",
+        northMsg9: "ครับพี่จะรีบไปนะครับ! คิดถึงเหมือนกัน", northMsg10: "อย่ารีบนะครับ ค่อยๆ ขับรถมานน้านอร์ธรอได้",
+        northMsg11: "ครับพี่จะค่อยๆ ขับนะครับ", northMsg12: "ครับนอร์ธรอได้",
+        northMsg13: "พี่มีประชุมด่วนครับนอร์ธ สัญญาว่าจะมาทานข้าวตอนเที่ยงด้วย",
+        northMsg14: "ก็ว่าอยู่พี่โจหายไปไหนประชุมนี่เอง สัญญาแล้วนะครับว่าจะมาทานเข้าด้วยกัน",
+        northMsg15: "สัญญาแล้วนะครับว่าจะมาทานเข้าด้วยกัน", northMsg16: "น่าจะติดประชุมอยู่แน่เลย นอร์ธไปหาอะไรทานก่อนนะครับ",
+        northMsg17: "นอร์ธกินข้าวอยู่พี่ทิตย์กวนนอร์ธอีกแล้วบอกพี่โจบล็อกมัน พี่มันทำอะไรพี่โจอีกแล้วครับ เดี๋ยวนอร์ธจัดการให้",
+        northMsg18: "เดี๋ยวพี่กลับไปบอกที่ห้องนะครับ ตอนทานข้าวเที่ยงด้วยกัน",
+        northMsg19: "ทำไมบอกนอร์ธเลยไม่ได้ล่ะครับพี่โจ", northMsg20: "มันตัวน่ารำคาญนะครับ พี่เลยบล็อกไปให้จบ ๆ เจอกันที่ห้องน่ะ"
     },
     en: {
         galleryTitle: 'Gallery', tabPictures: 'Pictures', tabAlbums: 'Albums', itemsSuffix: 'items', today: 'Today', yesterday: 'Yesterday', noPhotos: 'No photos yet', favAdded: 'Added to favorites', favRemoved: 'Removed from favorites', langSelectedMsg: 'English selected', appNameGallery: 'Gallery', appNameMessages: 'Messages', appNameIg: 'Instagram', appNameLine: 'LINE', appNameKbank: 'K PLUS', appNameStore: 'Store', appNameStocks: 'Stocks',
@@ -38,7 +63,28 @@ const i18n = {
         kbankAcc: 'My Account', kbankBalanceLabel: 'Available Balance', kbankTransfer: 'Transfer', kbankScan: 'Scan QR', kbankTopup: 'Top Up', kbankAll: 'All', kbankFav: 'Favorites', kbankEdit: 'Edit', kbankRecent: 'Recent Transactions', kbankTx1: 'Transfer to North', kbankTx2: 'Payment (Shopping)', kbankTx3: 'Payment (Commission)', kbankModalTitle: 'Transfer / Payment', kbankAmountLabel: 'Amount (THB)', kbankConfirmBtn: 'Confirm Transfer',
         stocksTitle: 'Portfolio', stocksWatchlist: 'Watchlist', stocksUsMarket: 'US Market', stocksBuy: 'Buy', stocksSell: 'Sell',
         toastPhone: 'Phone', toastInternet: 'Internet', toastCamera: 'Camera', toastStore: 'Store', toastNewAlbum: 'New Album', toastSearch: 'Search', toastMore: 'More', toastEditor: 'AI Photo Editor', toastShare: 'Quick Share', toastDeleted: 'Deleted', toastSimOnly: 'Simulation only', toastChatSearch: 'Search chats', toastAddFriend: 'Add Friend / Create Group',
-        viewerFav: 'Fav', viewerEdit: 'Edit', viewerShare: 'Share', viewerDelete: 'Delete', albumTitles: { camera: 'Camera', favorites: 'Favorites', screenshots: 'Pre wedding', downloads: 'Downloads' }
+        viewerFav: 'Fav', viewerEdit: 'Edit', viewerShare: 'Share', viewerDelete: 'Delete', albumTitles: { camera: 'Camera', favorites: 'Favorites', screenshots: 'Pre wedding', downloads: 'Downloads' },
+        
+        arthitMsg1: "What are you doing, Jo?", arthitMsg2: "Read and reply to me, Jo.", arthitMsg3: "You are not answering me at all, Jo.", arthitMsg4: "Annoying.",
+        arthitMsg5: "What did you bother North for?", arthitMsg6: "Because you didn't answer me, Jo.", arthitMsg7: "And you blocked me too.", arthitMsg8: "Jo, I'm short on money. Transfer some to me.",
+        arthitMsg9: "Damn it.", arthitMsg10: "Say what you want.", arthitMsg11: "I have to go have lunch with North soon.", arthitMsg12: "Are you that broke that you have to ask me for money, Thit?",
+        arthitMsg13: "Just transfer it, Jo. Otherwise you'll be late for lunch with North...",
+        arthitMsg14: "Send slip", arthitMsg15: "Are you satisfied now, Thit?", arthitMsg16: "Yeah, that's it.",
+
+        northMsg1: "I'll pick you up this evening.", northMsg2: "Don't you have a meeting? P'Prang told me.",
+        northMsg3: "Something came up, so the meeting was postponed. Don't you want me to pick you up?", northMsg4: "Not like that at all. North was just wondering. See you this evening, P'Jo.",
+        northMsg5: "It's lunch time, North. Have you eaten? Don't forget to eat on time 🍲",
+        northMsg6: "Having noodles in front of uni with Jiw. So good, but it would be better if P'Jo was here.",
+        northMsg7: "Are classes over? I'll drive over to wait in front of the building.",
+        northMsg8: "Just finished! North is waiting at the bench. Hurry up, I miss you so much.",
+        northMsg9: "I'll hurry over! Miss you too.", northMsg10: "Don't rush, drive slowly. North can wait.",
+        northMsg11: "Okay, I'll drive slowly.", northMsg12: "Okay, North can wait.",
+        northMsg13: "I have an urgent meeting, North. I promise to have lunch with you.",
+        northMsg14: "No wonder P'Jo disappeared for a meeting. Promised to have lunch together, remember.",
+        northMsg15: "Promised to have lunch together, remember.", northMsg16: "Must be stuck in a meeting. North will go find something to eat first.",
+        northMsg17: "North is eating and P'Thit is bothering me again asking me to tell P'Jo to block him...",
+        northMsg18: "I'll tell you back in the room. Let's have lunch together.",
+        northMsg19: "Why couldn't you just tell North directly, P'Jo?", northMsg20: "He is annoying, so I blocked him. See you in the room."
     },
     ko: {
         galleryTitle: '갤러리', tabPictures: '사진', tabAlbums: '앨범', itemsSuffix: '항목', today: '오늘', yesterday: '어제', noPhotos: '사진 없음', favAdded: '즐겨찾기에 추가됨', favRemoved: '즐겨찾기에서 삭제됨', langSelectedMsg: '한국어가 선택되었습니다', appNameGallery: '갤러리', appNameMessages: '메시지', appNameIg: 'Instagram', appNameLine: 'LINE', appNameKbank: 'K PLUS', appNameStore: '스토어', appNameStocks: '주식',
@@ -52,7 +98,28 @@ const i18n = {
         kbankAcc: '내 계좌', kbankBalanceLabel: '잔액', kbankTransfer: '이체', kbankScan: 'QR 스캔', kbankTopup: '충전', kbankAll: '전체', kbankFav: '즐겨찾기', kbankEdit: '편집', kbankRecent: '최근 거래', kbankTx1: 'North에게 이체', kbankTx2: '상품 결제 (쇼핑)', kbankTx3: '상품 결제 (수수료)', kbankModalTitle: '이체 / 결제', kbankAmountLabel: '금액 (THB)', kbankConfirmBtn: '이체 확인',
         stocksTitle: '투자 포트폴리오', stocksWatchlist: '관심 종목', stocksUsMarket: '미국 시장', stocksBuy: '매수', stocksSell: '매도',
         toastPhone: '전화', toastInternet: '인터넷', toastCamera: '카메라', toastStore: '스토어', toastNewAlbum: '새 앨범', toastSearch: '검색', toastMore: '더보기', toastEditor: 'AI 사진 편집기', toastShare: '퀵 공유', toastDeleted: '삭제됨', toastSimOnly: '시뮬레이션 전용', toastChatSearch: '채팅 검색', toastAddFriend: '친구 추가 / 그룹 생성',
-        viewerFav: '즐겨찾기', viewerEdit: '편집', viewerShare: '공유', viewerDelete: '삭제', albumTitles: { camera: '카메라', favorites: '즐겨찾기', screenshots: 'Pre wedding', downloads: '다운로드' }
+        viewerFav: '즐겨찾기', viewerEdit: '편집', viewerShare: '공유', viewerDelete: '삭제', albumTitles: { camera: '카메라', favorites: '즐겨찾기', screenshots: 'Pre wedding', downloads: '다운로드' },
+
+        arthitMsg1: "조, 뭐 하고 있어?", arthitMsg2: "읽었으면 좀 대답해줘, 조.", arthitMsg3: "내 연락 아예 안 받네, 조.", arthitMsg4: "귀찮게 하네.",
+        arthitMsg5: "너 노스한테 무슨 짓 했어?", arthitMsg6: "네가 내 연락 안 받으니까 그렇지, 조.", arthitMsg7: "게다가 나 차단까지 했잖아.", arthitMsg8: "조, 나 돈이 부족해. 좀 보내줘.",
+        arthitMsg9: "그래 이 자식아.", arthitMsg10: "할 말 있으면 해.", arthitMsg11: "나 곧 노스랑 점심 먹으러 가야 해.", arthitMsg12: "너 나한테 돈 빌려달라고 할 정도로 가난해졌냐, 팃?",
+        arthitMsg13: "그냥 보내줘, 조. 안 그러면 노스랑 점심 먹는 거 늦어진단 말이야. 그리고 차단할 생각 마, 끝까지 귀찮게 할 테니까.",
+        arthitMsg14: "송금표 전송", arthitMsg15: "이제 만족하냐, 팃?", arthitMsg16: "그래, 이 정도면 됐어.",
+
+        northMsg1: "저녁에 형이 데리러 갈게.", northMsg2: "미팅 있지 않아요? 프랑 누나(형)가 노스한테 그렇게 말한 것 같은데.",
+        northMsg3: "마침 일이 좀 생겨서 미팅이 연기됐어. 형이 데리러 가는 거 싫어?", northMsg4: "그런 뜻 아니에요. 노스가 그냥 궁금해서 물어본 거죠. 저녁에 봐요, 조 형.",
+        northMsg5: "점심시간이에요, 노스. 밥 먹었어요? 제때 잘 챙겨 먹어요 🍲",
+        northMsg6: "지우들이랑 학교 앞에서 국수 먹고 있어요. 엄청 맛있는데, 조 형이 같이 앉아서 먹었으면 더 맛있었을 텐데.",
+        northMsg7: "수업 끝났어요? 형이 건물 앞으로 차 가지고 갈게요. 너무 보고 싶어서 미치겠네.",
+        northMsg8: "마침 딱 끝났어요! 노스 벤치에 앉아서 기다릴게요. 빨리 와요, 엄청 보고 싶어요.",
+        northMsg9: "그래, 형이 빨리 갈게! 형도 보고 싶어.", northMsg10: "서두르지 마세요. 조심히 운전해 와요, 노스 기다릴 수 있으니까.",
+        northMsg11: "그래, 조심히 운전해서 갈게.", northMsg12: "네, 노스는 기다릴 수 있어요.",
+        northMsg13: "형이 갑자기 급한 미팅이 생겼어, 노스. 점심 같이 먹기로 한 거 꼭 갈게.",
+        northMsg14: "어쩐지 조 형이 어디 갔나 했더니 미팅 때문이었군요. 같이 점심 먹기로 한 거 약속했어요.",
+        northMsg15: "같이 밥 먹기로 한 거 약속한 거예요.", northMsg16: "미팅이 길어지나 보네. 노스 먼저 뭐 좀 먹으러 갈게요.",
+        northMsg17: "밥 먹고 있는데 팃 형이 또 귀찮게 하면서 조 형한테 차단하라고 하네요. 또 조 형한테 무슨 짓 한 거예요? 노스가 처리할게요.",
+        northMsg18: "방에 돌아가서 말해줄게. 점심 같이 먹으면서.",
+        northMsg19: "왜 바로 노스한테 말해주면 안 되나요, 조 형?", northMsg20: "귀찮은 녀석이라서 형이 그냥 깔끔하게 차단했어. 방에서 보자."
     },
     ja: {
         galleryTitle: 'ギャラリー', tabPictures: '写真', tabAlbums: 'アルバム', itemsSuffix: '件', today: '今日', yesterday: '昨日', noPhotos: '写真はありません', favAdded: 'お気に入りに追加しました', favRemoved: 'お気に入りから削除しました', langSelectedMsg: '日本語が選択されました', appNameGallery: 'ギャラリー', appNameMessages: 'メッセージ', appNameIg: 'Instagram', appNameLine: 'LINE', appNameKbank: 'K PLUS', appNameStore: 'ストア', appNameStocks: '株価',
@@ -66,7 +133,28 @@ const i18n = {
         kbankAcc: 'マイ口座', kbankBalanceLabel: '利用可能残高', kbankTransfer: '振込', kbankScan: 'QRスキャン', kbankTopup: 'チャージ', kbankAll: 'すべて', kbankFav: 'お気に入り', kbankEdit: '編集', kbankRecent: '最近の取引', kbankTx1: 'Northへ振込', kbankTx2: '商品支払い (ショッピング)', kbankTx3: '商品支払い (手数料)', kbankModalTitle: '振込 / 支払い', kbankAmountLabel: '金額 (THB)', kbankConfirmBtn: '振込を確認',
         stocksTitle: 'ポートフォリオ', stocksWatchlist: 'ウォッチリスト', stocksUsMarket: '米国市場', stocksBuy: '買付', stocksSell: '売却',
         toastPhone: '電話', toastInternet: 'インターネット', toastCamera: 'カメラ', toastStore: 'ストア', toastNewAlbum: '新規アルバム', toastSearch: '検索', toastMore: 'その他', toastEditor: 'AI写真エディタ', toastShare: 'クイック共有', toastDeleted: '削除済み', toastSimOnly: 'シミュレーション専用', toastChatSearch: 'チャット検索', toastAddFriend: '友達追加 / グループ作成',
-        viewerFav: 'お気に入り', viewerEdit: '編集', viewerShare: '共有', viewerDelete: '削除', albumTitles: { camera: 'カメラ', favorites: 'お気に入り', screenshots: 'Pre wedding', downloads: 'ダウンロード' }
+        viewerFav: 'お気に入り', viewerEdit: '編集', viewerShare: '共有', viewerDelete: '削除', albumTitles: { camera: 'カメラ', favorites: 'お気に入り', screenshots: 'Pre wedding', downloads: 'ダウンロード' },
+
+        arthitMsg1: "ジョ、何してるの？", arthitMsg2: "既読無視しないで返事してよ、ジョ。", arthitMsg3: "全然返事してくれないじゃん、ジョ。", arthitMsg4: "うざい。",
+        arthitMsg5: "ノースに何絡んだの？", arthitMsg6: "だって返事してくれないからじゃん、ジョ。", arthitMsg7: "そのうえブロックするし。", arthitMsg8: "ジョ、お金足りないんだけど送金してよ。",
+        arthitMsg9: "ああ、クソが。", arthitMsg10: "用事があるなら言えよ。", arthitMsg11: "もうすぐノースと昼食に行かないといけないんだ。", arthitMsg12: "お前、俺に金ねだるほど貧乏になったのかよ、ティット？",
+        arthitMsg13: "送金してよ、ジョ。ノースとの昼食に遅れちゃうだろ。それにブロックとか考えるな、しつこく連絡してやるからな。",
+        arthitMsg14: "送金明細を送る", arthitMsg15: "これで満足か、ティット？", arthitMsg16: "ああ、これでいいんだよ。",
+
+        northMsg1: "夕方、迎えに行くね。", northMsg2: "会議じゃなかったっけ？プラーンさんがノースにそう言ってた気がするけど。",
+        northMsg3: "ちょっと色々あって会議が延期になったんだ。迎えに来てほしくないの？", northMsg4: "そんなことないよ。ノースはちょっと気になっただけ。また夕方ね、ジョ先輩。",
+        northMsg5: "お昼休みだよ、ノース。ご飯食べた？時間通りに食べてね 🍲",
+        northMsg6: "ジウたちと大学の前でラーメン食べてます。すごく美味しいけど、ジョ先輩が一緒に食べてくれたらもっと美味しいのに。",
+        northMsg7: "授業終わった？今から建物の前まで車で迎えに行くね。会いたくてたまらないよ。",
+        northMsg8: "ちょうど終わったところ！ノース、ベンチで待ってるね。早く来て、すごく会いたい。",
+        northMsg9: "うん、すぐ行くね！先輩も会いたいよ。", northMsg10: "急がないでね。ゆっくり運転してきて、ノースは待てるから。",
+        northMsg11: "うん、ゆっくり運転していくね。", northMsg12: "うん、ノース待てるよ。",
+        northMsg13: "急な会議が入っちゃったんだ、ノース。お昼ご飯一緒に行くって約束したよね。",
+        northMsg14: "どうりでジョ先輩がいないと思った、会議だったんだね。一緒にお昼食べるって約束したからね。",
+        northMsg15: "一緒にご飯食べるって約束だからね。", northMsg16: "会議長引いてるんだね。ノース、先になにか食べてくるね。",
+        northMsg17: "ご飯食べてるのに、ティット先輩がまた邪魔してきて、ジョ先輩にブロックしろって言うの。またジョ先輩になにをしたの？ノースが何とかするから。",
+        northMsg18: "部屋に戻ってから話すね。一緒に昼食を食べながら。",
+        northMsg19: "どうしてすぐにノースに教えてくれないの、ジョ先輩？", northMsg20: "面倒くさい奴だから、先輩がすっきりブロックしたんだよ。部屋で会おう。"
     },
     zh: {
         galleryTitle: '相册', tabPictures: '照片', tabAlbums: '相册', itemsSuffix: '项目', today: '今天', yesterday: '昨天', noPhotos: '暂无照片', favAdded: '已添加到收藏夹', favRemoved: '已从收藏夹移除', langSelectedMsg: '已选择中文', appNameGallery: '相册', appNameMessages: '信息', appNameIg: 'Instagram', appNameLine: 'LINE', appNameKbank: 'K PLUS', appNameStore: '商店', appNameStocks: '股票',
@@ -80,14 +168,42 @@ const i18n = {
         kbankAcc: '我的账户', kbankBalanceLabel: '可用余额', kbankTransfer: '转账', kbankScan: '扫码', kbankTopup: '充值', kbankAll: '全部', kbankFav: '收藏夹', kbankEdit: '编辑', kbankRecent: '最近交易', kbankTx1: '转账给 North', kbankTx2: '商品付款 (购物)', kbankTx3: '商品付款 (佣金)', kbankModalTitle: '转账 / 付款', kbankAmountLabel: '金额 (THB)', kbankConfirmBtn: '确认转账',
         stocksTitle: '投资组合', stocksWatchlist: '关注列表', stocksUsMarket: '美国市场', stocksBuy: '买入', stocksSell: '卖出',
         toastPhone: '电话', toastInternet: '网页', toastCamera: '相机', toastStore: '商店', toastNewAlbum: '新相册', toastSearch: '搜索', toastMore: '更多', toastEditor: 'AI照片编辑器', toastShare: '快速分享', toastDeleted: '已删除', toastSimOnly: '仅模拟交易', toastChatSearch: '搜索聊天', toastAddFriend: '添加好友 / 创建群组',
-        viewerFav: '收藏', viewerEdit: '编辑', viewerShare: '分享', viewerDelete: '删除', albumTitles: { camera: '相机', favorites: '收藏夹', screenshots: 'Pre wedding', downloads: '下载' }
+        viewerFav: '收藏', viewerEdit: '编辑', viewerShare: '分享', viewerDelete: '删除', albumTitles: { camera: '相机', favorites: '收藏夹', screenshots: 'Pre wedding', downloads: '下载' },
+
+        arthitMsg1: "乔，你在干嘛？", arthitMsg2: "看了就回一下消息啊，乔。", arthitMsg3: "你根本不回我消息啊，乔。", arthitMsg4: "真烦人。",
+        arthitMsg5: "你去打扰North干嘛？", arthitMsg6: "还不是因为你不回我消息，乔。", arthitMsg7: "还把我拉黑了。", arthitMsg8: "乔，我钱不够了，转点给我。",
+        arthitMsg9: "行吧你个混蛋。", arthitMsg10: "有什么事直说。", arthitMsg11: "我一会儿得去跟North吃午饭了。", arthitMsg12: "你穷到要跟我要钱的地步了吗，Thit？",
+        arthitMsg13: "转给我吧，乔。不然跟North吃午饭要迟到了。还有别想着拉黑我，不然我一直烦你。",
+        arthitMsg14: "发送转账凭证", arthitMsg15: "这下你满意了吧，Thit？", arthitMsg16: "行，这就对了。",
+
+        northMsg1: "傍晚我去接你吧。", northMsg2: "不是有会议吗？Prang好像跟North说过。",
+        northMsg3: "刚好出了一点事，会议推迟了。难道你不想我去接你吗？", northMsg4: "才没有呢。North只是好奇。傍晚见啦，Jo哥。",
+        northMsg5: "午休啦，North。吃饭了吗？记得按时吃饭哦 🍲",
+        northMsg6: "正和Jiw他们在校门口吃面条呢，超级好吃。不过要是能和Jo哥一起吃肯定更香。",
+        northMsg7: "下课了吗？我开车去楼下接你啦。好想快点见到你。",
+        northMsg8: "刚好下课！North在长椅这儿等你哦。快来呀，超级想你的。",
+        northMsg9: "嗯，我马上就去！我也很想你。", northMsg10: "别太急呀，慢慢开车来，North等得起。",
+        northMsg11: "好，我会慢慢开的。", northMsg12: "嗯，North能等。",
+        northMsg13: "哥临时有个急会，North。答应过要一起吃午饭的。",
+        northMsg14: "就说Jo哥去哪了原来是开会。说好了要一起吃午饭的哦。",
+        northMsg15: "说好了要一起吃午饭的。", northMsg16: "估计还在开会吧。North先去吃点东西啦。",
+        northMsg17: "North在吃饭呢，Thit又来打扰我，叫我让Jo哥拉黑他。他又对Jo哥做什么了？North去处理。",
+        northMsg18: "等我回房间告诉你吧。边吃午饭边说。",
+        northMsg19: "为什么不能直接告诉North呢，Jo哥？", northMsg20: "那是个烦人的家伙，我直接拉黑了事。房间见。"
     }
 };
 
-// อัปเดตฟังก์ชันเลือกภาษาและบันทึกค่าลง localStorage เพื่อส่งต่อไปยังหน้าแชทย่อย
+// ============================================
+// ฟังก์ชันจัดการภาษา (Language & UI Translation)
+// ============================================
+function openLanguageModal() {
+    const modal = document.getElementById('lang-select-modal');
+    if (modal) modal.classList.remove('hidden');
+}
+
 function chooseInitialLanguage(lang) {
     currentLang = lang;
-    localStorage.setItem('sim_lang', lang); // บันทึกภาษาลง LocalStorage
+    localStorage.setItem('sim_lang', lang);
     
     const langBtnText = document.getElementById('lang-btn-text');
     if (langBtnText) langBtnText.innerText = currentLang.toUpperCase();
@@ -102,22 +218,18 @@ function chooseInitialLanguage(lang) {
     showToast(i18n[currentLang].langSelectedMsg);
 }
 
-// ฟังก์ชันปรับเปลี่ยนข้อความภาษาทั้งหมดบนหน้าจอ (UI, Messages, Widgets, K PLUS, LINE, IG, Stocks)
 function updateStaticUIText() {
     const txt = i18n[currentLang];
     
-    // Gallery UI
     if (document.getElementById('ui-gallery-title')) document.getElementById('ui-gallery-title').innerText = txt.galleryTitle;
     if (document.getElementById('tab-btn-pictures')) document.getElementById('tab-btn-pictures').innerText = txt.tabPictures;
     if (document.getElementById('tab-btn-albums')) document.getElementById('tab-btn-albums').innerText = txt.tabAlbums;
 
-    // Photo Viewer Actions
     if (document.getElementById('viewer-lbl-fav')) document.getElementById('viewer-lbl-fav').innerText = txt.viewerFav;
     if (document.getElementById('viewer-lbl-edit')) document.getElementById('viewer-lbl-edit').innerText = txt.viewerEdit;
     if (document.getElementById('viewer-lbl-share')) document.getElementById('viewer-lbl-share').innerText = txt.viewerShare;
     if (document.getElementById('viewer-lbl-delete')) document.getElementById('viewer-lbl-delete').innerText = txt.viewerDelete;
 
-    // Home Screen App Labels & Widgets
     if (document.getElementById('app-label-gallery')) document.getElementById('app-label-gallery').innerText = txt.appNameGallery;
     if (document.getElementById('app-label-messages')) document.getElementById('app-label-messages').innerText = txt.appNameMessages;
     if (document.getElementById('app-label-ig')) document.getElementById('app-label-ig').innerText = txt.appNameIg;
@@ -131,12 +243,10 @@ function updateStaticUIText() {
     if (document.getElementById('widget-summary')) document.getElementById('widget-summary').innerText = txt.summaryTitle;
     if (document.getElementById('widget-search-placeholder')) document.getElementById('widget-search-placeholder').innerText = txt.searchPlaceholder;
 
-    // Recents Overlay
     if (document.getElementById('recents-title')) document.getElementById('recents-title').innerText = txt.recentsTitle;
     if (document.getElementById('recents-clear-btn')) document.getElementById('recents-clear-btn').innerText = txt.recentsClear;
     if (document.getElementById('recents-home-btn')) document.getElementById('recents-home-btn').innerText = txt.recentsHome;
 
-    // Messages App
     if (document.getElementById('msg-contact-name')) document.getElementById('msg-contact-name').innerText = txt.msgContactName;
     if (document.getElementById('msg-contact-status')) document.getElementById('msg-contact-status').innerText = txt.msgContactStatus;
     if (document.getElementById('msg-date-1')) document.getElementById('msg-date-1').innerText = txt.msgDate1;
@@ -151,13 +261,11 @@ function updateStaticUIText() {
     if (document.getElementById('msg-outgoing')) document.getElementById('msg-outgoing').innerText = txt.msgOutgoing;
     if (document.getElementById('msg-incoming')) document.getElementById('msg-incoming').innerText = txt.msgIncoming;
 
-    // Instagram App
     if (document.getElementById('ig-app-title')) document.getElementById('ig-app-title').innerText = txt.igAppName;
     if (document.getElementById('x-user-name')) document.getElementById('x-user-name').innerText = txt.xUserName;
     if (document.getElementById('x-post-content')) document.getElementById('x-post-content').innerHTML = txt.xPostContent;
     if (document.getElementById('ig-view-translate')) document.getElementById('ig-view-translate').innerText = txt.xViewTranslate;
 
-    // LINE App
     if (document.getElementById('line-title-text')) document.getElementById('line-title-text').innerHTML = `${txt.lineTabChat} <span class="text-[#06C755]">LINE</span>`;
     if (document.getElementById('line-tab-chat')) document.getElementById('line-tab-chat').innerText = txt.lineTabChat;
     if (document.getElementById('line-tab-friend')) document.getElementById('line-tab-friend').innerText = txt.lineTabFriend;
@@ -166,7 +274,6 @@ function updateStaticUIText() {
     if (document.getElementById('line-chat2-msg')) document.getElementById('line-chat2-msg').innerText = txt.lineChat2Msg;
     if (document.getElementById('line-chat3-msg')) document.getElementById('line-chat3-msg').innerText = txt.lineChat3Msg;
 
-    // K PLUS App
     if (document.getElementById('kbank-acc-label')) document.getElementById('kbank-acc-label').innerText = txt.kbankAcc;
     if (document.getElementById('kbank-bal-label')) document.getElementById('kbank-bal-label').innerText = txt.kbankBalanceLabel;
     if (document.getElementById('kbank-btn-transfer')) document.getElementById('kbank-btn-transfer').innerText = txt.kbankTransfer;
@@ -183,7 +290,6 @@ function updateStaticUIText() {
     if (document.getElementById('kbank-amount-label')) document.getElementById('kbank-amount-label').innerText = txt.kbankAmountLabel;
     if (document.getElementById('kbank-confirm-btn')) document.getElementById('kbank-confirm-btn').innerText = txt.kbankConfirmBtn;
 
-    // Stocks App
     if (document.getElementById('stocks-title')) document.getElementById('stocks-title').innerText = txt.stocksTitle;
     if (document.getElementById('stocks-watchlist')) document.getElementById('stocks-watchlist').innerText = txt.stocksWatchlist;
     if (document.getElementById('stocks-usmarket')) document.getElementById('stocks-usmarket').innerText = txt.stocksUsMarket;
@@ -191,7 +297,9 @@ function updateStaticUIText() {
     if (document.getElementById('stocks-btn-sell')) document.getElementById('stocks-btn-sell').innerText = txt.stocksSell;
 }
 
-// Album Photos Database Data
+// ============================================
+// ฐานข้อมูลรูปภาพและอัลบั้ม (Album Photos Database)
+// ============================================
 const albumData = {
     camera: {
         photos: [
@@ -228,80 +336,9 @@ const albumData = {
     }
 };
 
-function openLanguageModal() {
-    const modal = document.getElementById('lang-select-modal');
-    if (modal) modal.classList.remove('hidden');
-}
-
-function chooseInitialLanguage(lang) {
-    currentLang = lang;
-    
-    const langBtnText = document.getElementById('lang-btn-text');
-    if (langBtnText) langBtnText.innerText = currentLang.toUpperCase();
-
-    updateStaticUIText();
-    renderPicturesTab();
-    renderAlbumsGrid();
-
-    const modal = document.getElementById('lang-select-modal');
-    if (modal) modal.classList.add('hidden');
-
-    showToast(i18n[currentLang].langSelectedMsg);
-}
-
-// ฟังก์ชันปรับเปลี่ยนข้อความภาษาทั้งหมดบนหน้าจอ (UI, Messages, Widgets, Recents)
-function updateStaticUIText() {
-    const txt = i18n[currentLang];
-    
-    // Gallery UI
-    if (document.getElementById('ui-gallery-title')) document.getElementById('ui-gallery-title').innerText = txt.galleryTitle;
-    if (document.getElementById('tab-btn-pictures')) document.getElementById('tab-btn-pictures').innerText = txt.tabPictures;
-    if (document.getElementById('tab-btn-albums')) document.getElementById('tab-btn-albums').innerText = txt.tabAlbums;
-
-    // Photo Viewer Actions
-    if (document.getElementById('viewer-lbl-fav')) document.getElementById('viewer-lbl-fav').innerText = txt.viewerFav;
-    if (document.getElementById('viewer-lbl-edit')) document.getElementById('viewer-lbl-edit').innerText = txt.viewerEdit;
-    if (document.getElementById('viewer-lbl-share')) document.getElementById('viewer-lbl-share').innerText = txt.viewerShare;
-    if (document.getElementById('viewer-lbl-delete')) document.getElementById('viewer-lbl-delete').innerText = txt.viewerDelete;
-
-    // Home Screen App Labels & Widgets
-    if (document.getElementById('app-label-gallery')) document.getElementById('app-label-gallery').innerText = txt.appNameGallery;
-    if (document.getElementById('app-label-messages')) document.getElementById('app-label-messages').innerText = txt.appNameMessages;
-    if (document.getElementById('widget-city')) document.getElementById('widget-city').innerText = txt.city;
-    if (document.getElementById('widget-weather-desc')) document.getElementById('widget-weather-desc').innerText = txt.weatherDesc;
-    if (document.getElementById('widget-summary')) document.getElementById('widget-summary').innerText = txt.summaryTitle;
-    if (document.getElementById('widget-search-placeholder')) document.getElementById('widget-search-placeholder').innerText = txt.searchPlaceholder;
-
-    // Recents Overlay
-    if (document.getElementById('recents-title')) document.getElementById('recents-title').innerText = txt.recentsTitle;
-    if (document.getElementById('recents-clear-btn')) document.getElementById('recents-clear-btn').innerText = txt.recentsClear;
-    if (document.getElementById('recents-home-btn')) document.getElementById('recents-home-btn').innerText = txt.recentsHome;
-
-    // Messages App
-    if (document.getElementById('msg-contact-name')) document.getElementById('msg-contact-name').innerText = txt.msgContactName;
-    if (document.getElementById('msg-contact-status')) document.getElementById('msg-contact-status').innerText = txt.msgContactStatus;
-    
-    // ประวัติแชทเก่า
-    if (document.getElementById('msg-date-1')) document.getElementById('msg-date-1').innerText = txt.msgDate1;
-    if (document.getElementById('msg-old-1')) document.getElementById('msg-old-1').innerText = txt.msgOld1;
-    if (document.getElementById('msg-old-2')) document.getElementById('msg-old-2').innerText = txt.msgOld2;
-    if (document.getElementById('msg-old-3')) document.getElementById('msg-old-3').innerText = txt.msgOld3;
-    if (document.getElementById('msg-old-4')) document.getElementById('msg-old-4').innerText = txt.msgOld4;
-    
-    if (document.getElementById('msg-date-2')) document.getElementById('msg-date-2').innerText = txt.msgDate2;
-    if (document.getElementById('msg-old-5')) document.getElementById('msg-old-5').innerText = txt.msgOld5;
-    if (document.getElementById('msg-old-6')) document.getElementById('msg-old-6').innerText = txt.msgOld6;
-
-    if (document.getElementById('msg-date-header')) document.getElementById('msg-date-header').innerText = txt.msgDateHeader;
-    if (document.getElementById('msg-outgoing')) document.getElementById('msg-outgoing').innerText = txt.msgOutgoing;
-    if (document.getElementById('msg-incoming')) document.getElementById('msg-incoming').innerText = txt.msgIncoming;
-
-    // Instagram App
-    if (document.getElementById('x-user-name')) document.getElementById('x-user-name').innerText = txt.xUserName;
-    if (document.getElementById('x-post-content')) document.getElementById('x-post-content').innerHTML = txt.xPostContent;
-}
-
-// ฟังก์ชันแปลงรูปแบบวันที่และเดือนให้เป็นภาษาที่เลือก
+// ============================================
+// ฟังก์ชันจัดการวันที่และอัลบั้มรูปภาพ
+// ============================================
 function translateDateString(dateStr) {
     if (!dateStr) return '';
 
@@ -517,6 +554,9 @@ function closeAlbumDetail() {
     if (detailView) detailView.classList.add('hidden');
 }
 
+// ============================================
+// ฟังก์ชัน Photo Viewer & Swipe Gestures
+// ============================================
 function openPhotoViewer(photosList, index = 0) {
     if (typeof photosList === 'string') {
         currentViewerPhotos = [{ url: photosList, date: 'วันนี้' }];
@@ -611,6 +651,9 @@ function toggleViewerFavorite() {
     }
 }
 
+// ============================================
+// ฟังก์ชันควบคุมแอปพลิเคชัน (App Navigation & Stack)
+// ============================================
 function openApp(appId, theme) {
     document.querySelectorAll('.app-view').forEach(app => {
         app.classList.remove('active');
@@ -696,7 +739,6 @@ function showRecents() {
     const txt = i18n[currentLang];
     recentsList.innerHTML = '';
     
-    // อัปเดตรายชื่อแอปทั้งหมดให้ตรงกับไอคอนใน HTML
     const appTitles = {
         'app-gallery': { name: txt.appNameGallery, icon: 'fas fa-image' },
         'app-messages': { name: txt.appNameMessages, icon: 'fas fa-comment-alt' },
@@ -753,6 +795,9 @@ function removeRecent(appId) {
     showRecents();
 }
 
+// ============================================
+// Toast Notification & Event Listeners
+// ============================================
 let toastTimer;
 function showToast(message) {
     const toast = document.getElementById('toast');
@@ -772,26 +817,19 @@ document.addEventListener('DOMContentLoaded', () => {
     renderAlbumsGrid();
     setupPhotoViewerSwipe();
     
-    // เปิด Modal เลือกภาษาเมื่อเริ่มต้น
-    openLanguageModal();
+    if (!localStorage.getItem('sim_lang')) {
+        openLanguageModal();
+    }
 });
-// ============================================
-// เช็ค Hash จาก URL เพื่อเปิดแอพอัตโนมัติ (เช่น กลับจากหน้าแชทย่อย)
-// ============================================
+
 window.addEventListener('load', () => {
     if (window.location.hash) {
-        const targetAppId = window.location.hash.substring(1); // ตัดเครื่องหมาย # ออก
-        
-        // ถ้าเป็น #app-line ให้ปิดหน้าต่างเลือกภาษาและเปิดแอป LINE ทันที
+        const targetAppId = window.location.hash.substring(1);
         if (targetAppId === 'app-line') {
-            // ปิด Modal เลือกภาษา
             const modal = document.getElementById('lang-select-modal');
             if (modal) modal.classList.add('hidden');
             
-            // เปิดแอป LINE
             openApp('app-line', 'light');
-            
-            // ลบ Hash ออกจาก URL เพื่อให้ URL ดูสะอาด
             history.replaceState(null, null, window.location.pathname);
         }
     }
